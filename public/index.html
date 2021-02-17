@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Agregar Productos</title>
+        <meta charset="utf-8">
+    </head>
+
+    <body>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/lux/bootstrap.min.css" integrity="sha384-9+PGKSqjRdkeAU7Eu4nkJU8RFaH8ace8HGXnkiKMP9I9Te0GJ4/km3L1Z8tXigpG" crossorigin="anonymous">
+
+        <style>
+            #agregarProductos{
+                margin: 10px;
+                width: 25vw;
+                height: 15vw;
+            }
+        </style>
+        
+        <section id="agregarProductos">
+            <h1>Registrar nuevo Producto:</h1>            
+            <form action="http://localhost:8080/api/products" method="post">
+                <div class="form-group">
+                    <label for="title">Title:</label>
+                    <input class="form-control" type="text" id="title" name="title">
+                </div>
+                <div class="form-group">
+                    <label for="price">Price:</label>
+                    <input class="form-control" type="number" id="price" name="price">
+                </div>
+
+                <div class="form-group">
+                    <label for="thumbnail">Thumbnail:</label>
+                    <input class="form-control" type="text" id="thumbnail" name="thumbnail">
+
+                </div>
+                <input id="submitForm" type="submit" class="btn btn-primary" value="Agregar Producto">
+            </form>
+        </section>
+    </body>
+
+</html>
