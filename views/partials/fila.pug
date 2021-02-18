@@ -1,0 +1,15 @@
+
+extends ../layouts/index
+
+block content
+    table.table.table-hover
+        tr
+            th Titulo:
+            th Precio:
+            th Imagen
+        each producto in products
+            tr
+                td producto.title
+                td producto.price
+                td 
+                    img(width=75 src=producto.thumbnail)

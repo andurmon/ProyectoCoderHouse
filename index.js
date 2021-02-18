@@ -10,17 +10,22 @@ const engine = require("./routes/engine");
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 
-app.set("views", "./views");
-app.engine("hbs",
-    handlebars({
-        extname:".hbs",
-        defaultLayout:"index.hbs",
-        layoutsDir:__dirname+"/views/layouts/",
-        partialsDir:__dirname +"/views/partials/"
-    })
-)
-app.set("view engine", "hbs");
+//Configurando Template Engines
+// app.set("views", "./views");
+// app.set("view engine", "hbs");
+// app.engine("hbs",
+//     handlebars({
+//         extname:".hbs",
+//         defaultLayout:"index.hbs",
+//         layoutsDir:__dirname+"/views/layouts/",
+//         partialsDir:__dirname +"/views/partials/"
+//     })
+// )
 
+app.set("views", "./views");
+app.set('view engine', 'pug');
+
+//Rutas
 app.get('/productos/vista', engine);
 app.use("/api/products", productos);
 
