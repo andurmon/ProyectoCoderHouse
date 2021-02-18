@@ -11,4 +11,20 @@ function engine(req, res){
         });
 }
 
-module.exports = engine;
+async function engineEJS(req, res){
+    let data = {isOk: false, products: [], error:""};
+    await getProductos()
+        .then( products => {
+            data = {isOk: true, products: products, error:""};
+        })
+        .catch(error => {
+            console.log("Error: ", error);
+            data = {isOk: false, products: [], error: error};
+        });
+    res.render('layouts/index', data)
+}
+
+module.exports = {
+    engine: engine,
+    engineEJS: engineEJS
+}
