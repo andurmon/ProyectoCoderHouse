@@ -1,22 +1,7 @@
 // File System y Random
-const rutaProductos = "./data/productos.txt";
+const {getProductos, escribirArchivos} = require('./archivos/archivos');
 const fs = require("fs");
-function getProductos(){
-    return new Promise((resolve, reject)=>{
-        fs.promises.readFile(rutaProductos, 'utf-8')
-            .then((prods)=>{
-                var products = JSON.parse(prods);
-                if (!products.length) reject({"error" : 'no hay productos cargados'});
-                resolve(products)
-            }).catch((error)=>{
-                reject({"error": error})
-            })
-    })
-}
 
-function escribirArchivo(productos){
-    fs.promises.writeFile(rutaProductos, JSON.stringify(productos));
-}
 
 class ApiClass{
 	constructor(){ }
