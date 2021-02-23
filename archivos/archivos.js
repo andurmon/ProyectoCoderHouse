@@ -21,5 +21,5 @@ function escribirArchivo(productos){
 module.exports = {
     rutaProductos: rutaProductos,
     getProductos: getProductos,
-    escribirArchivos: escribirArchivo
+    escribirArchivo: escribirArchivo
 }

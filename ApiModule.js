@@ -1,5 +1,5 @@
 // File System y Random
-const {getProductos, escribirArchivos} = require('./archivos/archivos');
+const {getProductos, escribirArchivo} = require('./archivos/archivos');
 const fs = require("fs");
 
 

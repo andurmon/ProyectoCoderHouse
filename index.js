@@ -2,6 +2,9 @@ const PORT = process.env.PORT || 8080;
 
 const express = require("express");
 const app = express();
+const http = require("http").createServer(app);
+const io = require("socket.io")(http);
+
 const handlebars = require('express-handlebars');
 
 const productos = require("./routes/productos")
@@ -19,11 +22,20 @@ app.engine("hbs",
         partialsDir:__dirname +"/views/partials/"
     })
 )
+
 app.set("view engine", "hbs");
 
+app.get('/agregar', (req, res)=>{
+    res.sendFile(__dirname + '/public/index.html');    
+})
 app.get('/productos/vista', engine);
 app.use("/api/products", productos);
 
-app.listen(PORT, ()=>{
+io.on("connection", socket => {
+    socket.emit("Se conecto", socket.id);
+    console.log("Se conecto un usuario con ID: ", socket.id);
+})
+
+http.listen(PORT, ()=>{
     console.log(`Escuchando en el Puerto: ${PORT}`);
 });
