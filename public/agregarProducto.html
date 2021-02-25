@@ -18,7 +18,7 @@
         
         <section id="agregarProductos">
             <h1>Registrar nuevo Producto:</h1>            
-            <form action="http://localhost:8080/api/products" method="post">
+            <form id="addProduct" >
                 <div class="form-group">
                     <label for="title">Title:</label>
                     <input class="form-control" type="text" id="title" name="title">
@@ -37,13 +37,31 @@
             </form>
         </section>
         
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.js" integrity="sha512-otOZr2EcknK9a5aa3BbMR9XOjYKtxxscwyRHN6zmdXuRfJ5uApkHB7cz1laWk2g8RKLzV9qv/fl3RPwfCuoxHQ==" crossorigin="anonymous"></script>
         <script src="/socket.io/socket.io.js"></script>
         <!-- CDN: <script src="https://cdn.socket.io/3.1.1/socket.io.min.js" integrity="sha384-gDaozqUvc4HTgo8iZjwth73C6dDDeOJsAgpxBcMpZYztUfjHXpzrpdrHRdVp8ySO" crossorigin="anonymous"></script> -->
-
+        
         <script>
             //Aqui me conecto al WebSocket
             const socket = io();
 
+            socket.on("connection", id =>{
+                console.log("[CLIENT] - Se recibio ID", id);
+            })
+
+            let form = document.forms.addProduct
+            form.addEventListener("submit", (ev)=>{
+                let payload = {
+                    title: form.elements.title.value,
+                    price: form.elements.price.value,
+                    thumbnail: form.elements.thumbnail.value
+                }
+                socket.emit('add', payload)
+            });
+
+            socket.on('saludo', msg => {
+                console.log(msg)
+            });          
             
         </script>
     </body>

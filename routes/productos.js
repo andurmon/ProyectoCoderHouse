@@ -10,4 +10,4 @@ router.post('/', api.post);
 router.put('/actualizar/:id', api.put);
 router.delete('/borrar/:id', api.delete);
 
-module.exports = router;
+module.exports =  router;

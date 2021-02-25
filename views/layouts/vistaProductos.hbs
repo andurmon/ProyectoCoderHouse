@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Agregar Productos</title>
+        <meta charset="utf-8">
+    </head>
+
+    <body>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/lux/bootstrap.min.css" integrity="sha384-9+PGKSqjRdkeAU7Eu4nkJU8RFaH8ace8HGXnkiKMP9I9Te0GJ4/km3L1Z8tXigpG" crossorigin="anonymous">
+     
+        <section>            
+            <div>{{{body}}}</div>
+            <div id="prueba"></div>
+        </section>
+        
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+        <!-- CDN: <script src="https://cdn.socket.io/3.1.1/socket.io.min.js" integrity="sha384-gDaozqUvc4HTgo8iZjwth73C6dDDeOJsAgpxBcMpZYztUfjHXpzrpdrHRdVp8ySO" crossorigin="anonymous"></script> -->
+        <script>
+            //Aqui me conecto al WebSocket
+            const socket = io();
+
+            socket.on("connection", id =>{
+                console.log("[CLIENT] - Se reibio ID", id);
+            })
+
+            socket.on('removed', id =>{
+                try {
+                    document.getElementById(id).remove();
+                }catch(error){
+                    console.log(error);
+                }finally{
+                    console.log("[CLIENT] - Se borro el producto", id)
+                }
+            })
+
+            socket.on('added', (producto)=>{
+                let fila = template(producto);
+                
+                console.log("Se agrego un producto")
+                let body = document.getElementById("tablaProductos").tBodies[0]
+
+                let tabla = document.getElementById("tablaProductos");
+
+                let row = tabla.insertRow(-1);
+                var cell1 = row.insertCell(0);
+                var cell2 = row.insertCell(1);
+                var cell3 = row.insertCell(2);
+                cell1.innerHTML = `${producto.id}. ${producto.title}`;
+                cell2.innerHTML = `${producto.price}`;
+                cell3.innerHTML = `<img width="75" src="${producto.thumbnail}"></img>`;
+                
+
+            })
+
+            socket.on('saludo', msg => {
+                console.log(msg)
+            });          
+            
+        </script>
+    </body>
+
+</html>
