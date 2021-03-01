@@ -13,13 +13,17 @@ const engine = require("./routes/engine");
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
-
+app.get('/styles/chat.css', (req, res)=>{
+    res.sendFile(__dirname + '/public/styles/chat.css');
+})
+const {getChats, escribirChat} = require("./archivos/archivos")
 io.on('connection', (socket) => {
     console.log("Se conecto un usuario con ID: ", socket.id);
-
-    socket.emit("connection", socket.id);
-    io.emit('saludo', '[SALUDO]');
     
+    getChats()
+        .then( messages => socket.emit("connection", {socketId: socket.id, chat: messages}))
+        .catch(e => console.log(e))
+        
     socket.on('add', payload => {
         axios.post("http://localhost:8080/api/products" , payload)
             .then((producto)=>socket.broadcast.emit('added', producto.data))
@@ -32,9 +36,18 @@ io.on('connection', (socket) => {
             .catch(()=>console.log("No se pudo"))
     })
     
-    socket.on("chat_msg", (mensaje)=>{
-        console.log(`${socket.id} dijo ==> ${mensaje}`);
-        io.emit("chat_msg", {socketId: socket.id, mensaje: mensaje})
+    socket.on("chat-msg", (payload)=>{
+        //Aqui irian metodos para guardar en un archivo los mensajes
+        let {email, message} = payload;
+        getChats()
+            .then( messages => {
+                messages.push( { sender: email, time: new Date(), message: message });
+                escribirChat(messages);
+            })
+            .catch(e => console.log(e));
+
+        console.log(`${email} dijo ==> ${message}`);
+        io.emit("chat-msg", {socketId: socket.id, email: email, message: message})
     })
 
     // io.emit('removed', 15)
@@ -53,7 +66,7 @@ app.engine("hbs",
 app.set("view engine", "hbs");
 
 app.get('/agregar', (req, res)=>{
-    res.sendFile(__dirname + '/public/agregarProducto.html');    
+    res.sendFile(__dirname + '/public/agregarProducto.html');
 });
 
 app.get('/chat', (req, res)=>{

@@ -7,54 +7,8 @@
     <body>
 
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/lux/bootstrap.min.css" integrity="sha384-9+PGKSqjRdkeAU7Eu4nkJU8RFaH8ace8HGXnkiKMP9I9Te0GJ4/km3L1Z8tXigpG" crossorigin="anonymous">
-        <style>
-            #section{
-                width: 500px;
-            }
+        <link rel="stylesheet" href="./styles/chat.css" crossorigin="anonymous">
 
-            #chat{
-                display: flex;
-                flex-direction: column;
-            }
-
-            /* #chat .chat_message{
-                color: white;
-            } */
-
-            #chat .self{
-                
-                align-self: flex-end;
-            }
-            #chat .external{
-                align-self: flex-start;
-            }
-            
-
-            .badge-self{
-                color: #fff;
-                background-color: blueviolet;
-            }
-         
-            .badge-external{
-                color: #fff;
-                background-color: brown;
-            }
-
-            .badge-date, .badge-sender{
-                background-color: #ced4da;
-                font-weight: bold;
-            }
-
-            .badge-date{
-                color: brown;
-            }
-            .badge-sender{
-                color: darkblue;
-            }
-            .badge-msg{
-                color: darkgreen;
-            }
-        </style>
         <h1>Chat Desafio n°13</h1>
         
         <section id="section">    
@@ -85,40 +39,68 @@
                 let {email, message} = form.elements;
                 
                 if (message.value){
-                    socket.emit("chat_msg", message.value);
+                    socket.emit("chat-msg", {email: email.value, message: message.value});
                     message.value = "";
                     email.disabled = true;
                 }
             })
 
             socket.on("connection", (payload)=>{
-                socketId = payload;
+                socketId = payload.socketId;
+                console.log(payload.chat);
+                let cuerpo = document.getElementById("chat");
+
+                let className = "external";
+                let chatHTML = cuerpo.innerHTML;
+                payload.chat.forEach( msg => {
+                    let {sender, time, message} = msg;
+                    time = formatDate(time);
+                    chatHTML = chatHTML + `
+                        <div class="${className} chat-message">
+                            <div class="badge badge-pill badge-message">
+                                <div class="algunnombre">    
+                                    <div class="badge-sender"> ${sender} </div>
+                                    <div class="badge-date"> [${time}] </div>
+                                </div>
+                                <div> &#8594; </div>
+                            </div> 
+                            <div class="badge-msg" > ${message}</div> 
+                            
+                        </div>`; 
+                })
+                console.log(chatHTML)
+                cuerpo.innerHTML = chatHTML;
             });
 
-            socket.on("chat_msg", (payload)=>{
-                let sender = payload.socketId;
+            socket.on("chat-msg", (payload)=>{
                 let className = "external";
-                if (socketId === sender) {
+                let { socketId: id, email: sender, message } = payload;
+
+                if (socketId === id) {
                     sender = "Tú";
                     className = "self"
                 }
-                let datetime = formatDate();
+                let time = formatDate();
                 let cuerpo = document.getElementById("chat");
-                // cuerpo.innerHTML = cuerpo.innerHTML + `
-                //     <div class="${className} chat_message">
-                //         <span class="badge badge-pill badge-${className}"><b>${sender} [${datetime}] &#8594;</b></span> ${payload.mensaje}
-                //     </div>`; 
+
+                // <div> &#8594; </div>
                 cuerpo.innerHTML = cuerpo.innerHTML + `
-                <div class="${className} chat_message">
-                    <span class="badge badge-pill badge-sender">  ${sender}</span>
-                    <span class="badge badge-pill badge-date"> [${datetime}] &#8594;</span> 
-                    <span class="badge-msg"> ${payload.mensaje}</span> 
-                    
+                <div class="${className} chat-message">
+                    <div class="badge badge-pill badge-message">
+                        <div class="algunnombre">    
+                            <div class="badge-sender"> ${sender} </div>
+                            <div class="badge-date"> [${time}] </div>
+                        </div>
+                        <div> &#8594; </div>
+                    </div> 
+                    <div class="badge-msg" > ${message}</div> 
                 </div>`; 
             })
 
-            function formatDate(){
-                let date = new Date()
+            function formatDate(date2format){
+                let date = new Date();
+                
+                if (date2format) date = new Date(date2format);
 
                 let DD = date.getDate();
                 let MM = date.getMonth() + 1;
@@ -127,9 +109,7 @@
                 let mm = date.getMinutes();
                 let ss = date.getSeconds();
 
-                if(MM < 10){
-                    MM = `0${MM}`
-                }
+                MM = MM < 10? `0${MM}`: MM;
                     
                 return `${DD}/${MM}/${YYYY} ${hh}:${mm}:${ss}`
                 
