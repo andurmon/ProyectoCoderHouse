@@ -15,8 +15,9 @@ app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 
 io.on('connection', (socket) => {
-    socket.emit("connection", socket.id);
     console.log("Se conecto un usuario con ID: ", socket.id);
+
+    socket.emit("connection", socket.id);
     io.emit('saludo', '[SALUDO]');
     
     socket.on('add', payload => {
@@ -29,6 +30,11 @@ io.on('connection', (socket) => {
         axios.post(`http://localhost:8080/api/products/${payload}`)
             .then((producto)=>socket.broadcast.emit('removed', producto.data))
             .catch(()=>console.log("No se pudo"))
+    })
+    
+    socket.on("chat_msg", (mensaje)=>{
+        console.log(`${socket.id} dijo ==> ${mensaje}`);
+        io.emit("chat_msg", {socketId: socket.id, mensaje: mensaje})
     })
 
     // io.emit('removed', 15)
@@ -48,6 +54,10 @@ app.set("view engine", "hbs");
 
 app.get('/agregar', (req, res)=>{
     res.sendFile(__dirname + '/public/agregarProducto.html');    
+});
+
+app.get('/chat', (req, res)=>{
+    res.sendFile(__dirname + '/public/chat.html');    
 });
 
 app.get('/productos/vista', engine);

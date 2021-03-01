@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>TITULO</title>
+    </head>
+    <body>
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/lux/bootstrap.min.css" integrity="sha384-9+PGKSqjRdkeAU7Eu4nkJU8RFaH8ace8HGXnkiKMP9I9Te0GJ4/km3L1Z8tXigpG" crossorigin="anonymous">
+        <style>
+            #section{
+                width: 500px;
+            }
+
+            #chat{
+                display: flex;
+                flex-direction: column;
+            }
+
+            /* #chat .chat_message{
+                color: white;
+            } */
+
+            #chat .self{
+                
+                align-self: flex-end;
+            }
+            #chat .external{
+                align-self: flex-start;
+            }
+            
+
+            .badge-self{
+                color: #fff;
+                background-color: blueviolet;
+            }
+         
+            .badge-external{
+                color: #fff;
+                background-color: brown;
+            }
+
+            .badge-date, .badge-sender{
+                background-color: #ced4da;
+                font-weight: bold;
+            }
+
+            .badge-date{
+                color: brown;
+            }
+            .badge-sender{
+                color: darkblue;
+            }
+            .badge-msg{
+                color: darkgreen;
+            }
+        </style>
+        <h1>Chat Desafio n°13</h1>
+        
+        <section id="section">    
+            <h2>Chat:</h2>
+            
+
+            <form id="sendForm">
+                <input id="email" class="form-control" name="email" placeholder="Email" autocomplete="off" type="email" required>
+                <div id=chat></div>
+                <textarea id="message" class="form-control" name="message" placeholder="Mensaje" autocomplete="off" required></textarea>
+                <button class="btn btn-success" type="submit">Enviar</button>
+            </form>
+
+            <div>andurmon@gmail.com</div>
+            
+        </section>
+
+        <script src="/socket.io/socket.io.js"></script>
+        <script>
+            //Aqui me conecto al WebSocket
+            const socket = io();
+            let socketId = "";
+
+            let form = document.forms.sendForm
+            
+            form.addEventListener("submit", (event)=>{
+                event.preventDefault();
+                let {email, message} = form.elements;
+                
+                if (message.value){
+                    socket.emit("chat_msg", message.value);
+                    message.value = "";
+                    email.disabled = true;
+                }
+            })
+
+            socket.on("connection", (payload)=>{
+                socketId = payload;
+            });
+
+            socket.on("chat_msg", (payload)=>{
+                let sender = payload.socketId;
+                let className = "external";
+                if (socketId === sender) {
+                    sender = "Tú";
+                    className = "self"
+                }
+                let datetime = formatDate();
+                let cuerpo = document.getElementById("chat");
+                // cuerpo.innerHTML = cuerpo.innerHTML + `
+                //     <div class="${className} chat_message">
+                //         <span class="badge badge-pill badge-${className}"><b>${sender} [${datetime}] &#8594;</b></span> ${payload.mensaje}
+                //     </div>`; 
+                cuerpo.innerHTML = cuerpo.innerHTML + `
+                <div class="${className} chat_message">
+                    <span class="badge badge-pill badge-sender">  ${sender}</span>
+                    <span class="badge badge-pill badge-date"> [${datetime}] &#8594;</span> 
+                    <span class="badge-msg"> ${payload.mensaje}</span> 
+                    
+                </div>`; 
+            })
+
+            function formatDate(){
+                let date = new Date()
+
+                let DD = date.getDate();
+                let MM = date.getMonth() + 1;
+                let YYYY = date.getFullYear();
+                let hh = date.getHours();
+                let mm = date.getMinutes();
+                let ss = date.getSeconds();
+
+                if(MM < 10){
+                    MM = `0${MM}`
+                }
+                    
+                return `${DD}/${MM}/${YYYY} ${hh}:${mm}:${ss}`
+                
+            }
+        </script>
+
+    </body>
+
+</html>
