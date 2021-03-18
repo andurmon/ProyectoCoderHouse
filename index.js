@@ -16,12 +16,32 @@ app.use(express.urlencoded({extended:true}));
 app.get('/styles/chat.css', (req, res)=>{
     res.sendFile(__dirname + '/public/styles/chat.css');
 })
-const {getChats, escribirChat} = require("./archivos/archivos")
+
+const {getChats, escribirChat} = require("./persistencia/mysql");
+const {optionsSQLITE} = require("./persistencia/mySQL.db")
+const knex = require('knex')(optionsSQLITE);
+
+try {
+    knex.schema.createTable('chats', table =>{
+        table.string('sender');
+        table.string('time', 20)
+        table.string('message');
+    })
+    .then(() => console.log("Se creo la tabla chats"))
+    .catch( e => console.log(e.code))
+
+} catch (error) {
+    console.log("Error: ", error);
+}
+
 io.on('connection', (socket) => {
     console.log("Se conecto un usuario con ID: ", socket.id);
     
-    getChats()
-        .then( messages => socket.emit("connection", {socketId: socket.id, chat: messages}))
+    knex.from('chats').select("*")
+        .then( messages => {
+            console.log(messages);
+            socket.emit("connection", {socketId: socket.id, chat: messages})
+        })
         .catch(e => console.log(e))
         
     socket.on('add', payload => {
@@ -39,12 +59,10 @@ io.on('connection', (socket) => {
     socket.on("chat-msg", (payload)=>{
         //Aqui irian metodos para guardar en un archivo los mensajes
         let {email, message} = payload;
-        getChats()
-            .then( messages => {
-                messages.push( { sender: email, time: new Date(), message: message });
-                escribirChat(messages);
-            })
-            .catch(e => console.log(e));
+        let time = new Date();
+        knex('chats').insert({ "sender": email, "time": time.toString(), "message": message })
+            .then(()=> console.log("Se inserto el mensaje: ", { "sender": email, "time": new Date(), "message": message }))
+            .catch(e => console.log(e))
 
         console.log(`${email} dijo ==> ${message}`);
         io.emit("chat-msg", {socketId: socket.id, email: email, message: message})

@@ -1,4 +1,4 @@
-const {getProductos} = require('../archivos/archivos');
+const {getProductos} = require('../persistencia/archivos');
 
 function engine(req, res){
     getProductos()

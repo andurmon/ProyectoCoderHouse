@@ -1,5 +1,9 @@
 // File System y Random
-const {getProductos, escribirArchivo} = require('./archivos/archivos');
+// const {getProductos, escribirArchivo} = require('./persistencia/archivos');
+
+const {options} = require("./persistencia/mySQL.db")
+const knex = require('knex')(options);
+
 const fs = require("fs");
 
 
@@ -7,69 +11,63 @@ class ApiClass{
 	constructor(){ }
 
 	async get(req, res){
-        getProductos()
-        .then( products => res.json(products))
-        .catch(e => res.send(e));
+        knex.from('productos').select("*")
+            .then((pdtos) => {
+                if (!pdtos.length) { res.send({"error" : 'No hay productos cargados'}); return}
+                res.json(pdtos);
+            })
+            .catch((err)=>{
+                res.send({"error" : err})
+            })
     }
     
     async getById(req, res){
-        getProductos()
-        .then( products => {
-            let product = products.find((product)=>product.id == req.params.id);
-            if (!product) res.status(404).send({"error" : `producto ${req.params.id} no encontrado`});
-            res.json(product);
-        })
-        .catch(e => res.send(e));
+        knex.from('productos').select("*").where("id", "=", req.params.id)
+            .then((pdtos) => {
+                if (!pdtos.length) { res.send({"error" :  `producto ${req.params.id} no encontrado`}); return}
+                res.json(pdtos);
+            })
+            .catch((err)=>{
+                res.send({"error" : err})
+            })
 	}
 
 	async post(req, res){
         let newProduct = req.body;
 
-        getProductos()
-        .then( products => {
-            let ids = products.map(product => {
-                return product.id;
+        knex.from('productos').select("*")
+            .then((pdtos) => {
+                if (pdtos.length) {
+                    let ids = pdtos.map(product => product.id )
+                    newProduct.id = Math.max(...ids) + 1;
+                }
+                
+                knex('productos').insert(newProduct)
             })
-            newProduct.id = Math.max(...ids) + 1;
-            products.push(newProduct);
-
-            escribirArchivo(products);
-            res.json(newProduct);
-        })
-        .catch(e => res.send(e));
+            .then (()=> res.send(newProduct))
+            .catch(err=>  res.send({"error" : err}) )
     }
 
     async put(req, res){
         let productBody = req.body;
 
-        getProductos()
-        .then( products => {
-            let product = products.find((product)=>product.id == req.params.id);
-            if (!product) res.status(404).send({"error" : `producto ${req.params.id} no encontrado`});
-    
-            product.title = productBody.title;
-            product.price = productBody.price;
-            product.thumbnail = productBody.thumbnail;
-            
-            escribirArchivo(products);
-            res.json(product)
-        })
-        .catch(e => res.send(e));
+        knex.from("productos").where("id", req.params.id).update(productBody)
+            .then(() => res.json(product))
+            .catch(err=>  res.send({"error" : err}) )
     }
 
     async delete(req, res){
-        getProductos()
-        .then( products => {
-            let product = products.find((product)=>product.id == req.params.id);
-            if (!product) res.status(404).send({"error" : `producto ${req.params.id} no encontrado`});
-
-            let index = products.indexOf(product);
-            products.splice(index, 1);
-
-            escribirArchivo(products);
-            res.send(product)
-        })
-        .catch(e => res.send(e));
+        let pdtoEliminado = {};
+        knex.from('productos').select("*").where("id", "=", req.params.id)
+            .then((pdtos) => {
+                if (!pdtos.length) { res.send({"error" :  `producto ${req.params.id} no encontrado`}); return}
+                pdtoEliminado = pdtos[0];
+                knex.from("productos").where("id", req.params.id).del()
+            })
+            .then( () => res.send())
+            .catch((err)=>{
+                res.send({"error" : err})
+            })
     }
 }
 
