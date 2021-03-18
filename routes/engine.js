@@ -1,14 +1,15 @@
-const {getProductos} = require('../persistencia/archivos');
+const {optionsSQLITE} = require("../persistencia/mySQL.db");
+const knex = require('knex')(optionsSQLITE);
 
 function engine(req, res){
-    getProductos()
-        .then( products => {
-            res.render('partials/tabla', {products: products})
+    knex.from('productos').select("*")
+        .then((pdtos) => {
+            res.render('partials/tabla', {products: pdtos})
         })
-        .catch(error => {
+        .catch((error)=>{
             console.log("Error: ", error);
             res.render('partials/notfound', error)
-        });
+        })
 }
 
 module.exports = engine;

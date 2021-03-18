@@ -30,6 +30,15 @@ try {
     .then(() => console.log("Se creo la tabla chats"))
     .catch( e => console.log(e.code))
 
+    knex.schema.createTable('productos', table =>{
+        table.increments("id").primary();
+        table.string('title', 20);
+        table.integer('price').unsigned().notNullable();
+        table.string('thumbnail');
+    })
+    .then(() => console.log("Se creo la tabla Productos"))
+    .catch( e => console.log(e.code))
+
 } catch (error) {
     console.log("Error: ", error);
 }
@@ -92,11 +101,7 @@ app.get('/chat', (req, res)=>{
 });
 
 app.get('/productos/vista', engine);
-app.use("/api/products", productos, ()=>{
-    io.on("connection", socket => {
-        socket.emit('saludo', 'A ver a ver a ver');
-    })
-});
+app.use("/api/products", productos);
 
 http.listen(PORT, ()=>{
     console.log(`Escuchando en el Puerto: ${PORT}`);

@@ -1,8 +1,8 @@
 // File System y Random
 // const {getProductos, escribirArchivo} = require('./persistencia/archivos');
 
-const {options} = require("./persistencia/mySQL.db")
-const knex = require('knex')(options);
+const {options, optionsSQLITE} = require("./persistencia/mySQL.db")
+const knex = require('knex')(optionsSQLITE);
 
 const fs = require("fs");
 
@@ -17,6 +17,7 @@ class ApiClass{
                 res.json(pdtos);
             })
             .catch((err)=>{
+                console.log(err);
                 res.send({"error" : err})
             })
     }
@@ -28,6 +29,7 @@ class ApiClass{
                 res.json(pdtos);
             })
             .catch((err)=>{
+                console.log(err);
                 res.send({"error" : err})
             })
 	}
@@ -42,7 +44,7 @@ class ApiClass{
                     newProduct.id = Math.max(...ids) + 1;
                 }
                 
-                knex('productos').insert(newProduct)
+                return knex('productos').insert(newProduct)
             })
             .then (()=> res.send(newProduct))
             .catch(err=>  res.send({"error" : err}) )
@@ -62,7 +64,7 @@ class ApiClass{
             .then((pdtos) => {
                 if (!pdtos.length) { res.send({"error" :  `producto ${req.params.id} no encontrado`}); return}
                 pdtoEliminado = pdtos[0];
-                knex.from("productos").where("id", req.params.id).del()
+                return knex.from("productos").where("id", req.params.id).del()
             })
             .then( () => res.send())
             .catch((err)=>{
