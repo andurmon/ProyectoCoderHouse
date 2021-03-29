@@ -23,11 +23,14 @@ try {
     console.log("MySQL init error: ", error);
 }
 
+function getProductos() {return  knex.from('productos').select("*")}
+
 function getChats() { return knex.from('chats').select("*") }
 
 function escribirChat(chat){ return knex('chats').insert(chat);}
 
 module.exports = {
+    getProductos: getProductos,
     getChats: getChats,
     escribirChat: escribirChat
 }

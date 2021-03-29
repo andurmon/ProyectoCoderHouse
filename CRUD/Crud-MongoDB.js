@@ -1,8 +1,8 @@
 const mongoose = require("mongoose")
 
 //Conexion a la base de datos
-// let rutaBD = "mongodb://localhost/ecommerce"
-let rutaBD = "mongodb+srv://andurmon:admin@cluster0.4b6ca.mongodb.net/ecommerce?retryWrites=true&w=majority"
+let rutaBD = "mongodb://localhost/ecommerce"
+// let rutaBD = "mongodb+srv://andurmon:admin@cluster0.4b6ca.mongodb.net/ecommerce?retryWrites=true&w=majority"
 
 mongoose.connect(rutaBD, {useNewUrlParser: true, useUnifiedTopology: true})
     .then(()=>console.log("Se conecto a la BD"))
