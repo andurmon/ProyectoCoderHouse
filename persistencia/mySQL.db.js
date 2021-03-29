@@ -12,7 +12,7 @@ const options = {
 
 const optionsSQLITE = {
     client: 'sqlite3',
-    connection: {filename: "./persistencia/chats.sqlite"},
+    connection: {filename: "./data/chats.sqlite"},
     useNullAsDefault: true,
     pool: {min: 0, max:10}
 }

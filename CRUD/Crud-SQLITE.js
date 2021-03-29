@@ -1,13 +1,13 @@
 // File System y Random
 // const {getProductos, escribirArchivo} = require('./persistencia/archivos');
 
-const {options, optionsSQLITE} = require("./persistencia/mySQL.db")
+const {options, optionsSQLITE} = require("../persistencia/mySQL.db")
 const knex = require('knex')(optionsSQLITE);
 
 const fs = require("fs");
 
 
-class ApiClass{
+class CrudSQLITE{
 	constructor(){ }
 
 	async get(req, res){
@@ -73,4 +73,4 @@ class ApiClass{
     }
 }
 
-module.exports = ApiClass;
+module.exports = CrudSQLITE;

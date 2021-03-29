@@ -1,8 +1,10 @@
-const express = require("express");
-const router = express.Router();
+const router = require("express").Router();
 
-const ApiClass = require("../ApiModule");
-let api = new ApiClass();
+let Crud;
+// Crud = require("../CRUD/Crud-SQLITE");
+Crud = require("../CRUD/Crud-MongoDB");
+
+let api = new Crud();
 
 router.get('/', api.get);
 router.get('/:id', api.getById);
