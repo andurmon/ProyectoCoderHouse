@@ -18,8 +18,28 @@ function escribirArchivo(productos){
     fs.promises.writeFile(rutaProductos, JSON.stringify(productos));
 }
 
+const rutaChats = "./data/group-chat.txt";
+function getChats(){
+    return new Promise((resolve, reject)=>{
+        fs.promises.readFile(rutaChats, 'utf-8')
+            .then((chat)=>{
+                var messages = JSON.parse(chat);
+                if (!messages.length) resolve([]);
+                resolve(messages)
+            }).catch((error)=>{
+                reject({"error": error})
+            })
+    })
+}
+
+function escribirChat(chat){
+    fs.promises.writeFile(rutaChats, JSON.stringify(chat));
+}
+
 module.exports = {
     rutaProductos: rutaProductos,
     getProductos: getProductos,
-    escribirArchivos: escribirArchivo
+    escribirArchivo: escribirArchivo,
+    getChats: getChats,
+    escribirChat: escribirChat
 }

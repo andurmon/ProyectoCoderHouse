@@ -1,7 +1,5 @@
 // File System y Random
-const {getProductos, escribirArchivos} = require('./archivos/archivos');
-const fs = require("fs");
-
+const {getProductos, escribirArchivo} = require('../persistencia/archivos');
 
 class ApiClass{
 	constructor(){ }

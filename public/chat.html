@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>TITULO</title>
+    </head>
+    <body>
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/lux/bootstrap.min.css" integrity="sha384-9+PGKSqjRdkeAU7Eu4nkJU8RFaH8ace8HGXnkiKMP9I9Te0GJ4/km3L1Z8tXigpG" crossorigin="anonymous">
+        <link rel="stylesheet" href="./styles/chat.css" crossorigin="anonymous">
+
+        <h1>Chat Desafio n°13</h1>
+        
+        <section id="section">    
+            <h2>Chat:</h2>
+            
+
+            <form id="sendForm">
+                <input id="email" class="form-control" name="email" placeholder="Email" autocomplete="off" type="email" required>
+                <div id=chat></div>
+                <textarea id="message" class="form-control" name="message" placeholder="Mensaje" autocomplete="off" required></textarea>
+                <button class="btn btn-success" type="submit">Enviar</button>
+            </form>
+
+            <div>andurmon@gmail.com</div>
+            
+        </section>
+
+        <script src="/socket.io/socket.io.js"></script>
+        <script>
+            //Aqui me conecto al WebSocket
+            const socket = io();
+            let socketId = "";
+
+            let form = document.forms.sendForm
+            
+            form.addEventListener("submit", (event)=>{
+                event.preventDefault();
+                let {email, message} = form.elements;
+                
+                if (message.value){
+                    socket.emit("chat-msg", {email: email.value, message: message.value});
+                    message.value = "";
+                    email.disabled = true;
+                }
+            })
+
+            socket.on("connection", (payload)=>{
+                socketId = payload.socketId;
+                console.log(payload.chat);
+                let cuerpo = document.getElementById("chat");
+
+                let className = "external";
+                let chatHTML = cuerpo.innerHTML;
+                payload.chat.forEach( msg => {
+                    let {sender, time, message} = msg;
+                    time = formatDate(time);
+                    chatHTML = chatHTML + `
+                        <div class="${className} chat-message">
+                            <div class="badge badge-pill badge-message">
+                                <div class="algunnombre">    
+                                    <div class="badge-sender"> ${sender} </div>
+                                    <div class="badge-date"> [${time}] </div>
+                                </div>
+                                <div> &#8594; </div>
+                            </div> 
+                            <div class="badge-msg" > ${message}</div> 
+                            
+                        </div>`; 
+                })
+                console.log(chatHTML)
+                cuerpo.innerHTML = chatHTML;
+            });
+
+            socket.on("chat-msg", (payload)=>{
+                let className = "external";
+                let { socketId: id, email: sender, message } = payload;
+
+                if (socketId === id) {
+                    sender = "Tú";
+                    className = "self"
+                }
+                let time = formatDate();
+                let cuerpo = document.getElementById("chat");
+
+                // <div> &#8594; </div>
+                cuerpo.innerHTML = cuerpo.innerHTML + `
+                <div class="${className} chat-message">
+                    <div class="badge badge-pill badge-message">
+                        <div class="algunnombre">    
+                            <div class="badge-sender"> ${sender} </div>
+                            <div class="badge-date"> [${time}] </div>
+                        </div>
+                        <div> &#8594; </div>
+                    </div> 
+                    <div class="badge-msg" > ${message}</div> 
+                </div>`; 
+            })
+
+            function formatDate(date2format){
+                let date = new Date();
+                
+                if (date2format) date = new Date(date2format);
+
+                let DD = date.getDate();
+                let MM = date.getMonth() + 1;
+                let YYYY = date.getFullYear();
+                let hh = date.getHours();
+                let mm = date.getMinutes();
+                let ss = date.getSeconds();
+
+                MM = MM < 10? `0${MM}`: MM;
+                    
+                return `${DD}/${MM}/${YYYY} ${hh}:${mm}:${ss}`
+                
+            }
+        </script>
+
+    </body>
+
+</html>

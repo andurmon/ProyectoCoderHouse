@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Agregar Productos</title>
+        <meta charset="utf-8">
+    </head>
+
+    <body>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/lux/bootstrap.min.css" integrity="sha384-9+PGKSqjRdkeAU7Eu4nkJU8RFaH8ace8HGXnkiKMP9I9Te0GJ4/km3L1Z8tXigpG" crossorigin="anonymous">
+        <link rel="stylesheet" href="./styles/chat.css" crossorigin="anonymous">
+
+        <style>
+            section{
+                padding: 8px;
+                /* background-color:lightgray;                 */
+                margin: 10px;
+                border: 1px solid black;
+            }
+            /* .form-control{
+                background-color: white;
+            } */
+            
+        </style>
+        
+        <section id="agregarProductos">
+            <h1>Registrar nuevo Producto:</h1>            
+            <form id="addProduct" >
+                <div class="form-group">
+                    <label for="title">Title:</label>
+                    <input class="form-control" type="text" id="title" name="title">
+                </div>
+                <div class="form-group">
+                    <label for="price">Price:</label>
+                    <input class="form-control" type="number" id="price" name="price">
+                </div>
+
+                <div class="form-group">
+                    <label for="thumbnail">Thumbnail:</label>
+                    <input class="form-control" type="text" id="thumbnail" name="thumbnail">
+
+                </div>
+                <input id="submitForm" type="submit" class="btn btn-primary" value="Agregar Producto">
+            </form>
+        </section>
+        
+        <section id="section">    
+            <h2>Chat:</h2>
+            
+            <form id="sendForm">
+                <input id="email" class="form-control" name="email" placeholder="Email" autocomplete="off" type="email" required>
+                <div id=chat></div>
+                <textarea id="message" class="form-control" name="message" placeholder="Mensaje" autocomplete="off" required></textarea>
+                <button class="btn btn-success" type="submit">Enviar</button>
+            </form>
+            
+        </section>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.js" integrity="sha512-otOZr2EcknK9a5aa3BbMR9XOjYKtxxscwyRHN6zmdXuRfJ5uApkHB7cz1laWk2g8RKLzV9qv/fl3RPwfCuoxHQ==" crossorigin="anonymous"></script>
+        <script src="/socket.io/socket.io.js"></script>
+        <!-- CDN: <script src="https://cdn.socket.io/3.1.1/socket.io.min.js" integrity="sha384-gDaozqUvc4HTgo8iZjwth73C6dDDeOJsAgpxBcMpZYztUfjHXpzrpdrHRdVp8ySO" crossorigin="anonymous"></script> -->
+        
+        <script>
+            //Aqui me conecto al WebSocket
+            const socket = io();
+            let socketId = "";
+
+            // Formulario de Agregar productos
+            let addProductForm = document.forms.addProduct
+            addProductForm.addEventListener("submit", (ev)=>{
+                let payload = {
+                    title: addProductForm.elements.title.value,
+                    price: addProductForm.elements.price.value,
+                    thumbnail: addProductForm.elements.thumbnail.value
+                }
+                socket.emit('add', payload)
+            });
+
+            // Formulario para enviar un mensaje via Chat
+            let sendMsgForm = document.forms.sendForm
+            sendMsgForm.addEventListener("submit", (event)=>{
+                event.preventDefault();
+                let {email, message} = sendMsgForm.elements;
+                
+                if (message.value){
+                    socket.emit("chat-msg", {email: email.value, message: message.value});
+                    message.value = "";
+                    email.disabled = true;
+                }
+            })
+
+            socket.on("connection", (payload)=>{
+                socketId = payload.socketId;
+                console.log(payload.chat);
+                let cuerpo = document.getElementById("chat");
+
+                let className = "external";
+                let chatHTML = cuerpo.innerHTML;
+                payload.chat.forEach( msg => {
+                    let {sender, time, message} = msg;
+                    time = formatDate(time);
+                    chatHTML = chatHTML + `
+                        <div class="${className} chat-message">
+                            <div class="badge badge-pill badge-message">
+                                <div class="algunnombre">    
+                                    <div class="badge-sender"> ${sender} </div>
+                                    <div class="badge-date"> [${time}] </div>
+                                </div>
+                                <div> &#8594; </div>
+                            </div> 
+                            <div class="badge-msg" > ${message}</div> 
+                            
+                        </div>`; 
+                })
+                console.log(chatHTML)
+                cuerpo.innerHTML = chatHTML;
+            });
+
+            socket.on("chat-msg", (payload)=>{
+                let className = "external";
+                let { socketId: id, email: sender, message } = payload;
+
+                if (socketId === id) {
+                    sender = "Tú";
+                    className = "self"
+                }
+                let time = formatDate();
+                let cuerpo = document.getElementById("chat");
+
+                // <div> &#8594; </div>
+                cuerpo.innerHTML = cuerpo.innerHTML + `
+                <div class="${className} chat-message">
+                    <div class="badge badge-pill badge-message">
+                        <div class="algunnombre">    
+                            <div class="badge-sender"> ${sender} </div>
+                            <div class="badge-date"> [${time}] </div>
+                        </div>
+                        <div> &#8594; </div>
+                    </div> 
+                    <div class="badge-msg" > ${message}</div> 
+                </div>`; 
+            })
+
+            function formatDate(date2format){
+                let date = new Date();
+                
+                if (date2format) date = new Date(date2format);
+
+                let DD = date.getDate();
+                let MM = date.getMonth() + 1;
+                let YYYY = date.getFullYear();
+                let hh = date.getHours();
+                let mm = date.getMinutes();
+                let ss = date.getSeconds();
+
+                MM = MM < 10? `0${MM}`: MM;
+                    
+                return `${DD}/${MM}/${YYYY} ${hh}:${mm}:${ss}`
+                
+            }
+        </script>
+    </body>
+
+</html>
