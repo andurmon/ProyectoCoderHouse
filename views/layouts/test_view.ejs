@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/slate/bootstrap.min.css" integrity="sha384-8iuq0iaMHpnH2vSyvZMSIqQuUnQA7QM+f6srIdlgBrTSEyd//AWNMyEaSF2yPzNQ" crossorigin="anonymous">
+
+    <style>
+        table, th, td {
+            border: 1px solid;
+        }
+    </style>
+    
+    
+    <h1 id="typography">Productos:</h1>
+    <% if(isOk) {%>
+        <%- include('../partials/tabla', {products: products}) %>
+    <% } else{%>
+        <%- include('../partials/notfound', {error: error.error}) %>
+    <% } %>
+    
+</body>
+</html>

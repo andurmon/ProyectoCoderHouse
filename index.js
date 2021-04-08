@@ -9,6 +9,7 @@ const io = require("socket.io")(http);
 
 const productos = require("./routes/productos");
 const {engineEJS: engine} = require("./routes/engine");
+const testView = require("./routes/test.view");
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
@@ -16,7 +17,6 @@ app.use(express.urlencoded({extended:true}));
 require("./sockets/sockets")(io)
 
 app.set("views", "./views");
-
 app.set("view engine", "ejs")
 app.get('/productos/vista', engine);
 
@@ -30,6 +30,7 @@ app.get('/chat', (req, res)=>{
 
 app.get('/productos/vista', engine);
 app.use("/api/products", productos);
+app.use('/productos/vista-test', testView);
 
 http.listen(PORT, ()=>{
     console.log(`Escuchando en el Puerto: ${PORT}`);

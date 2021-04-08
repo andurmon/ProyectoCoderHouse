@@ -6,7 +6,6 @@ const knex = require('knex')(optionsSQLITE);
 
 const fs = require("fs");
 
-
 class CrudSQLITE{
 	constructor(){ }
 
