@@ -1,6 +1,6 @@
 // const {getChats, escribirChat} = require("../persistencia/mysql");
 const {getChats, escribirChat} = require("../persistencia/mongodb");
-
+const {normalize, denormalize} = require("../normlize/normalizeChat");
 const axios = require("axios");
 
 module.exports = (io) => {
@@ -9,7 +9,11 @@ module.exports = (io) => {
         
         getChats()
             .then( messages => {
-                socket.emit("connection", {socketId: socket.id, chat: messages})
+                console.log(messages)
+                let normMessages = normalize(messages);
+                console.log("Norm => ", normMessages)
+                console.log("Denorm => ", denormalize(normalize(messages)))
+                socket.emit("connection", {socketId: socket.id, chat: normMessages})
             })
             .catch(e => console.log(e))
             

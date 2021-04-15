@@ -57,9 +57,16 @@
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.js" integrity="sha512-otOZr2EcknK9a5aa3BbMR9XOjYKtxxscwyRHN6zmdXuRfJ5uApkHB7cz1laWk2g8RKLzV9qv/fl3RPwfCuoxHQ==" crossorigin="anonymous"></script>
         <script src="/socket.io/socket.io.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/normalizr@3.6.1/dist/normalizr.browser.min.js"></script>
         <!-- CDN: <script src="https://cdn.socket.io/3.1.1/socket.io.min.js" integrity="sha384-gDaozqUvc4HTgo8iZjwth73C6dDDeOJsAgpxBcMpZYztUfjHXpzrpdrHRdVp8ySO" crossorigin="anonymous"></script> -->
         
         <script>
+
+            const autor = new normalizr.schema.Entity("Autor", {}, {idAttribute: "_id"});
+            const mensajeSchema = new normalizr.schema.Entity("Mensajes", {
+                sender: autor
+            }, {idAttribute: "_id"});
+
             //Aqui me conecto al WebSocket
             const socket = io();
             let socketId = "";
@@ -95,14 +102,19 @@
 
                 let className = "external";
                 let chatHTML = cuerpo.innerHTML;
-                payload.chat.forEach( msg => {
+
+                console.log(payload.chat);
+                
+                const denormalizedData = normalizr.denormalize(payload.chat.result, mensajeSchema, payload.chat.entities);
+                console.log(denormalizedData);
+                denormalizedData.forEach( msg => {
                     let {sender, time, message} = msg;
                     time = formatDate(time);
                     chatHTML = chatHTML + `
                         <div class="${className} chat-message">
                             <div class="badge badge-pill badge-message">
                                 <div class="algunnombre">    
-                                    <div class="badge-sender"> ${sender} </div>
+                                    <div class="badge-sender"> ${sender.nombre} </div>
                                     <div class="badge-date"> [${time}] </div>
                                 </div>
                                 <div> &#8594; </div>
