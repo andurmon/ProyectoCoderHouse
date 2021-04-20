@@ -1,8 +1,10 @@
 const mongoose = require("mongoose");
+const { usersSchema } = require("./users-model");
+
 
 const mensajesSchema = new mongoose.Schema({
     id: mongoose.ObjectId,
-    sender: {type: String, required: true},
+    sender: usersSchema,
     time: {type: Date, default:Date.now},
     message: {type: String, required: true}
 })

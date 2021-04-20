@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Agregar Productos</title>
+        <meta charset="utf-8">
+    </head>
+
+    <body>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/lux/bootstrap.min.css" integrity="sha384-9+PGKSqjRdkeAU7Eu4nkJU8RFaH8ace8HGXnkiKMP9I9Te0GJ4/km3L1Z8tXigpG" crossorigin="anonymous">
+        <link rel="stylesheet" href="./styles/chat.css" crossorigin="anonymous">
+
+        <style>
+            section{
+                padding: 8px;
+                /* background-color:lightgray;                 */
+                margin: 10px;
+                border: 1px solid black;
+            }
+            /* .form-control{
+                background-color: white;
+            } */
+            
+        </style>
+        
+        <form id="logIn">
+            <label for="uname"><b>Username</b></label>
+                <input type="text" class="form-control" placeholder="Enter Username" name="email" required>
+            
+                <!-- <label for="psw"><b>Password</b></label>
+                <input type="password" class="form-control" placeholder="Enter Password" name="psw" required> -->
+                    
+                <button class="btn btn-success" type="submit">Login</button>
+                <label>
+                <!-- <input type="checkbox" checked="checked" name="remember"> Remember me -->
+
+                <button class="btn btn-danger" type="button" >Cancel</button>
+            </label>
+        </form>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/3.6.2/fetch.min.js" integrity="sha512-1Gn7//DzfuF67BGkg97Oc6jPN6hqxuZXnaTpC9P5uw8C6W4yUNj5hoS/APga4g1nO2X6USBb/rXtGzADdaVDeA==" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.js" integrity="sha512-otOZr2EcknK9a5aa3BbMR9XOjYKtxxscwyRHN6zmdXuRfJ5uApkHB7cz1laWk2g8RKLzV9qv/fl3RPwfCuoxHQ==" crossorigin="anonymous"></script>
+        <!-- CDN: <script src="https://cdn.socket.io/3.1.1/socket.io.min.js" integrity="sha384-gDaozqUvc4HTgo8iZjwth73C6dDDeOJsAgpxBcMpZYztUfjHXpzrpdrHRdVp8ySO" crossorigin="anonymous"></script> -->
+        
+        <script>
+
+            let logIn = document.forms.logIn;
+
+            logIn.addEventListener("submit", (ev)=>{
+                axios.post("Http://localhost:8080/logIn", {
+                    email: logIn.elements.email.value
+                });
+            });
+
+
+            function formatDate(date2format){
+                let date = new Date();
+                
+                if (date2format) date = new Date(date2format);
+
+                let DD = date.getDate();
+                let MM = date.getMonth() + 1;
+                let YYYY = date.getFullYear();
+                let hh = date.getHours();
+                let mm = date.getMinutes();
+                let ss = date.getSeconds();
+
+                MM = MM < 10? `0${MM}`: MM;
+                    
+                return `${DD}/${MM}/${YYYY} ${hh}:${mm}:${ss}`
+            }
+        </script>
+    </body>
+
+</html>

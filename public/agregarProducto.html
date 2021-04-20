@@ -60,6 +60,8 @@
         <!-- CDN: <script src="https://cdn.socket.io/3.1.1/socket.io.min.js" integrity="sha384-gDaozqUvc4HTgo8iZjwth73C6dDDeOJsAgpxBcMpZYztUfjHXpzrpdrHRdVp8ySO" crossorigin="anonymous"></script> -->
         
         <script>
+            
+            console.log("SESIONESSS", sessionStorage.getItem("logedIn"));
             //Aqui me conecto al WebSocket
             const socket = io();
             let socketId = "";
@@ -90,11 +92,13 @@
 
             socket.on("connection", (payload)=>{
                 socketId = payload.socketId;
-                console.log(payload.chat);
                 let cuerpo = document.getElementById("chat");
 
                 let className = "external";
                 let chatHTML = cuerpo.innerHTML;
+
+                console.log("Connection!", payload.chat);
+
                 payload.chat.forEach( msg => {
                     let {sender, time, message} = msg;
                     time = formatDate(time);
@@ -102,7 +106,7 @@
                         <div class="${className} chat-message">
                             <div class="badge badge-pill badge-message">
                                 <div class="algunnombre">    
-                                    <div class="badge-sender"> ${sender} </div>
+                                    <div class="badge-sender"> ${sender.email} </div>
                                     <div class="badge-date"> [${time}] </div>
                                 </div>
                                 <div> &#8594; </div>
@@ -111,7 +115,7 @@
                             
                         </div>`; 
                 })
-                console.log(chatHTML)
+                
                 cuerpo.innerHTML = chatHTML;
             });
 
@@ -131,7 +135,7 @@
                 <div class="${className} chat-message">
                     <div class="badge badge-pill badge-message">
                         <div class="algunnombre">    
-                            <div class="badge-sender"> ${sender} </div>
+                            <div class="badge-sender"> ${sender.email} </div>
                             <div class="badge-date"> [${time}] </div>
                         </div>
                         <div> &#8594; </div>

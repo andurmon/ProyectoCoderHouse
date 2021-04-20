@@ -4,7 +4,7 @@ const productosSchema = new mongoose.Schema({
     id: mongoose.ObjectId,
     title: {type: String, required: true},
     price: {type: Number, required: true},
-    thumbnail: {type: String, dafault: ""},
+    thumbnail: {type: String, default: ""},
 })
 
 const Productos = mongoose.model("productos", productosSchema);
