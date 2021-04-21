@@ -15,15 +15,16 @@ function engine(req, res){
 }
 
 async function engineEJS(req, res){
-    let data = {isOk: false, products: [], error:"No se ha cargado"};
+    let data = {isOk: false, username: null, products: [], error:"No se ha cargado"};
     await getProductos()
         .then( products => {
-            data = {isOk: true, products: products, error:""};
+            data = {isOk: true, username: req.session.username, products: products, error:""};
         })
         .catch(error => {
             console.log("Error: ", error);
-            data = {isOk: false, products: [], error: error};
+            data = {isOk: false, username: null, products: [], error: error};
         });
+
     res.render('layouts/index', data)
 
 }

@@ -12,13 +12,9 @@
         <style>
             section{
                 padding: 8px;
-                /* background-color:lightgray;                 */
                 margin: 10px;
                 border: 1px solid black;
             }
-            /* .form-control{
-                background-color: white;
-            } */
             
         </style>
         
@@ -60,8 +56,8 @@
         <!-- CDN: <script src="https://cdn.socket.io/3.1.1/socket.io.min.js" integrity="sha384-gDaozqUvc4HTgo8iZjwth73C6dDDeOJsAgpxBcMpZYztUfjHXpzrpdrHRdVp8ySO" crossorigin="anonymous"></script> -->
         
         <script>
-            
-            console.log("SESIONESSS", sessionStorage.getItem("logedIn"));
+        
+            console.log("SESIONESS LOGED IN: ", sessionStorage.getItem("loggedIn"));
             //Aqui me conecto al WebSocket
             const socket = io();
             let socketId = "";

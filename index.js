@@ -13,6 +13,7 @@ const io = require("socket.io")(http);
 const productos = require("./routes/productos");
 const {engineEJS: engine} = require("./routes/engine");
 const testView = require("./routes/test.view");
+const { Users } = require("./models/users-model");
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
@@ -26,16 +27,30 @@ app.use(session({
 require("./sockets/sockets")(io)
 
 app.set("views", "./views");
-app.set("view engine", "ejs")
-app.get('/productos/vista', engine);
+app.set("view engine", "ejs");
 
 app.post("/login", (req, res)=>{
-    req.session.loggedIn = true;
-    console.log(req.body);
-    res.send("Loggin in");
+    Users.findOne({email: req.body.email})
+        .then(u => {
+            console.log(u);
+            if (!u){
+                res.status(401).send("Not logged in");
+                return;
+            }
+            req.session.username = u.nombre;
+            req.session.email = u.email;
+            req.session.loggedIn = true;
+            res.send("Logged in");
+        })
+        .catch(e => {
+            console.log(e);
+            res.status(500).send("Error de servidor");
+        })
+    
+    
 });
 
-app.get("/logout", (req, res)=>{
+app.post("/logout", (req, res)=>{
     req.session.loggedIn = false;
     res.send("Logout")
     
@@ -53,13 +68,25 @@ app.get('/agregar', (req, res)=>{
     res.sendFile(__dirname + '/public/agregarProducto.html');
 });
 
+app.get('/productos/vista', (req, res)=> {
+    
+    if(!req.session.loggedIn){
+        res.sendFile(__dirname + '/public/logIn.html');
+        return;
+    }
+
+    engine(req, res);
+});
+
+app.use("/api/products", productos);
+app.use('/productos/vista-test', testView);
 app.get('/chat', (req, res)=>{
     res.sendFile(__dirname + '/public/chat.html');    
 });
 
-app.get('/productos/vista', engine);
-app.use("/api/products", productos);
-app.use('/productos/vista-test', testView);
+app.get('/styles/chat.css', (req, res)=>{
+    res.sendFile(__dirname + '/public/styles/chat.css');
+});
 
 http.listen(PORT, ()=>{
     console.log(`Escuchando en el Puerto: ${PORT}`);
