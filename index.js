@@ -8,6 +8,8 @@ const app = express();
 const http = require("http").createServer(app);
 const io = require("socket.io")(http);
 
+const MongoStore = require("connect-mongo");
+
 // const handlebars = require('express-handlebars');
 
 const productos = require("./routes/productos");
@@ -19,7 +21,11 @@ app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
 app.use(session({
-    secret: "Secret",
+    // secret: "Secret",
+    secret: MongoStore.create({
+        mongoUrl: "mongodb+srv://cluster0.4b6ca.mongodb.net/myFirstDatabase",
+        mongoOptions: {useNewUrlParser: true, useUnifiedTopology: true}
+    }),
     resave: false,
     saveUninitialized: false
 }));
