@@ -6,7 +6,8 @@
     </head>
 
     <body>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/lux/bootstrap.min.css" integrity="sha384-9+PGKSqjRdkeAU7Eu4nkJU8RFaH8ace8HGXnkiKMP9I9Te0GJ4/km3L1Z8tXigpG" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/slate/bootstrap.min.css" integrity="sha384-8iuq0iaMHpnH2vSyvZMSIqQuUnQA7QM+f6srIdlgBrTSEyd//AWNMyEaSF2yPzNQ" crossorigin="anonymous">     
+        <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/lux/bootstrap.min.css" integrity="sha384-9+PGKSqjRdkeAU7Eu4nkJU8RFaH8ace8HGXnkiKMP9I9Te0GJ4/km3L1Z8tXigpG" crossorigin="anonymous"> -->
         <link rel="stylesheet" href="../styles/chat.css" crossorigin="anonymous">
 
         <style>
@@ -37,6 +38,8 @@
             </label>
         </form>
 
+        <div id="loader" class="loader loader-invisible"></div>
+
         <div id="message"></div>
         <iframe style="position: absolute; width:0; height:0; border:0;" name="login-result"></iframe>
 
@@ -47,20 +50,25 @@
         <script>
 
             let logIn = document.forms.logIn;
-
-
+            let loader = document.getElementById("loader");
+            
             logIn.addEventListener("submit", (ev)=>{
+                loader.className = "loader loader-visible";
                 axios.post("http://localhost:8080/logIn", {
                     email: logIn.elements.email.value
                 })
                 .then(res => {
                     console.log("REspuesta", res);
                     document.getElementById("message").innerHTML = "";
+                    window.history.go(0);
                 })
                 .catch(e => {
                     console.log("Erorricito:", e);
                     document.getElementById("message").innerHTML = `<h2>No se pudo logear &#128269;  &#x1F616; </h2>`
-                });
+                })
+                .finally(()=>{
+                    loader.className = "loader loader-invisible";
+                })
             });
 
 

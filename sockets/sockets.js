@@ -2,6 +2,7 @@
 const {getChats, escribirChat} = require("../persistencia/mongodb");
 
 const axios = require("axios");
+const { Users } = require("../models/users-model");
 
 module.exports = (io) => {
     io.on('connection', (socket) => {
@@ -28,13 +29,20 @@ module.exports = (io) => {
         socket.on("chat-msg", (payload)=>{
             //Aqui irian metodos para guardar en un archivo los mensajes
             let {email, message} = payload;
-            let time = new Date();
-            escribirChat({ "sender": email, "time": time.toString(), "message": message })
-                .then(()=> console.log("Se inserto el mensaje: ", { "sender": email, "time": new Date(), "message": message }))
-                .catch(e => console.log(e))
-    
-            console.log(`${email} dijo ==> ${message}`);
-            io.emit("chat-msg", {socketId: socket.id, email: email, message: message})
+
+            Users.findOne({email: email})
+            .then(sender => {
+                let time = new Date();
+                escribirChat({ "sender": sender, "time": time.toString(), "message": message })
+                    .then(()=> console.log("Se inserto el mensaje: ", { "sender": sender, "time": new Date(), "message": message }))
+                    .catch(e => console.log(e))
+        
+                console.log(`${email} dijo ==> ${message}`);
+                io.emit("chat-msg", {socketId: socket.id, sender: sender, message: message})
+            })
+            .catch(e => console.log(e))
+
+            
         })
     
     });

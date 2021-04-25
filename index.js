@@ -9,6 +9,9 @@ const http = require("http").createServer(app);
 const io = require("socket.io")(http);
 
 const MongoStore = require("connect-mongo");
+const RedisStore = require("connect-redis")(session);
+
+const redisClient = require("redis").createClient(6379);
 
 // const handlebars = require('express-handlebars');
 
@@ -21,9 +24,15 @@ app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
 app.use(session({
-    // secret: "Secret",
-    secret: MongoStore.create({
-        mongoUrl: "mongodb+srv://cluster0.4b6ca.mongodb.net/myFirstDatabase",
+    secret: "Secret",
+    // store: new RedisStore({
+    //     host: "localhost",
+    //     port: 6379,
+    //     client: redisClient,
+    //     ttl: 300
+    // }),
+    store: MongoStore.create({
+        mongoUrl: "mongodb+srv://andurmon:admin@cluster0.4b6ca.mongodb.net/ecommerce?retryWrites=true&w=majority",
         mongoOptions: {useNewUrlParser: true, useUnifiedTopology: true}
     }),
     resave: false,
@@ -51,9 +60,7 @@ app.post("/login", (req, res)=>{
         .catch(e => {
             console.log(e);
             res.status(500).send("Error de servidor");
-        })
-    
-    
+        })    
 });
 
 app.post("/logout", (req, res)=>{

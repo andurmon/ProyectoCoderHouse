@@ -23,6 +23,7 @@
     <section>
         <h1>Hola <%= username %> Bienvenid@ </h1>
         <button id="logOutBtn" class="btn btn-primary">Log Out </button>
+        <div id="loader" class="loader loader-invisible"></div>
     </section>
 
     <section id="agregarProductos">
@@ -51,7 +52,7 @@
         
         <form id="sendForm">
             <input id="email" class="form-control" name="email" placeholder="Email" autocomplete="off" type="email" required>
-            <div id=chat></div>
+            <div id="chat"></div>
             <textarea id="message" class="form-control" name="message" placeholder="Mensaje" autocomplete="off" required></textarea>
             <button class="btn btn-success" type="submit">Enviar</button>
         </form>
@@ -75,20 +76,24 @@
 
 
     <script>
-
+        document.getElementById("email").defaultValue= '<%= email %>'
         //Aqui me conecto al WebSocket
         const socket = io();
         let socketId = "";
-        
+        let loader = document.getElementById("loader");
+
         document.getElementById("logOutBtn").addEventListener("click", ev =>{
+            loader.className = "loader loader-visible";
             axios.post("http://localhost:8080/logout")
             .then(res => {
                 console.log("REspuesta", res);
-                // document.getElementById("message").innerHTML = "";
+                window.history.go(0);
             })
             .catch(e => {
                 console.log("Erorricito:", e);
-                // document.getElementById("message").innerHTML = `<h2>No se pudo logear &#128269;  &#x1F616; </h2>`
+            })
+            .finally(()=>{
+                loader.className = "loader loader-invisible";
             });
         });
 
@@ -122,11 +127,18 @@
 
             let className = "external";
             let chatHTML = cuerpo.innerHTML;
-
+            chatHTML = "";
             console.log("Connection!", payload.chat);
 
             payload.chat.forEach( msg => {
                 let {sender, time, message} = msg;
+                className = "external"
+                
+                if (sender.email === document.getElementById("email").value) {
+                    className = "self"
+                    sender.email = "Tú"
+                }
+
                 time = formatDate(time);
                 chatHTML = chatHTML + `
                     <div class="${className} chat-message">
@@ -147,10 +159,10 @@
 
         socket.on("chat-msg", (payload)=>{
             let className = "external";
-            let { socketId: id, email: sender, message } = payload;
-
+            let { socketId: id, sender, message } = payload;
+            
             if (socketId === id) {
-                sender = "Tú";
+                sender.email = "Tú";
                 className = "self"
             }
             let time = formatDate();
