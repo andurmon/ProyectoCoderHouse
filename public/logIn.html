@@ -25,17 +25,13 @@
         
         <form id="logIn" rel="noreferrer" target="login-result" >
             <label for="uname"><b>Username</b></label>
-                <input type="text" class="form-control" placeholder="Enter Username" name="email" required>
-            
-                <!-- <label for="psw"><b>Password</b></label>
-                <input type="password" class="form-control" placeholder="Enter Password" name="psw" required> -->
-                    
-                <button class="btn btn-success" type="submit">Login</button>
-                <label>
-                <!-- <input type="checkbox" checked="checked" name="remember"> Remember me -->
-
-                <button class="btn btn-danger" type="button" >Cancel</button>
-            </label>
+            <input type="text" class="form-control" placeholder="Enter Username" name="email" required>
+        
+            <label for="psw"><b>Password</b></label>
+            <input type="password" class="form-control" placeholder="Enter Password" name="password" required>
+                
+            <button class="btn btn-success" type="submit">Login</button>
+            <button class="btn btn-danger" type="button" >Cancel</button>
         </form>
 
         <div id="loader" class="loader loader-invisible"></div>
@@ -55,7 +51,8 @@
             logIn.addEventListener("submit", (ev)=>{
                 loader.className = "loader loader-visible";
                 axios.post("http://localhost:8080/logIn", {
-                    email: logIn.elements.email.value
+                    email: logIn.elements.email.value,
+                    password: logIn.elements.password.value
                 })
                 .then(res => {
                     console.log("REspuesta", res);
