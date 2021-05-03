@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Registrar usuario</title>
+        <meta charset="utf-8">
+    </head>
+
+    <body>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/slate/bootstrap.min.css" integrity="sha384-8iuq0iaMHpnH2vSyvZMSIqQuUnQA7QM+f6srIdlgBrTSEyd//AWNMyEaSF2yPzNQ" crossorigin="anonymous">     
+
+        <style>
+            section{
+                padding: 8px;
+                margin: 10px;
+                border: 1px solid black;
+            }
+            /* Overwrite default styles of hr */
+            hr {
+                border: 1px solid #f1f1f1;
+                margin-bottom: 25px;
+            }   
+        
+            * {
+                box-sizing: border-box;
+            }
+            
+            /* Add padding to containers */
+            .container {
+                padding: 16px;
+                /* background-color: white; */
+            }
+
+            required {
+                color: red;
+            }
+
+        </style>
+        
+        <!-- <form id="signUpForm"  rel="noreferrer" target="signUpForm-result" > -->
+        <form id="signUpForm" action="http://localhost:8080/signup" method="post" rel="noreferrer" target="_parent" >
+            <div class="container">
+                <h1>Registrarse</h1>
+                <p>Para registrarse por favor llenar los siguientes datos.</p>
+                <hr>
+
+                <label for="uname"><b>Correo electronico</b><required>*</required></label>
+                <input type="text" class="form-control" placeholder="Ingrese Email" name="email" required>
+            
+                <label for="psw"><b>Password</b><required>*</required></label>
+                <input type="password" class="form-control" placeholder="Enter Password" name="password" required>
+    
+                <!-- <label for="psw"><b>Repeat Password</b><required>*</required></label>
+                <input type="password" class="form-control" placeholder="Enter Password" name="password" required> -->
+                
+                <label for="name"><b>Nombre</b><required>*</required></label>
+                <input type="text" class="form-control" placeholder="Nombre" name="nombre" required>
+    
+                <label for="apellido"><b>Apellido</b><required>*</required></label>
+                <input type="text" class="form-control" placeholder="Apelido" name="apellido" required>
+    
+                <label for="age"><b>Edad</b><required>*</required></label>
+                <input type="number" class="form-control" placeholder="Edad" name="edad" min=0 max="99" required>
+    
+                <label for="alias"><b>Alias</b><required>*</required></label>
+                <input type="text" class="form-control" placeholder="Alias" name="alias" required>
+
+                <label for="avatar"><b>Avatar</b></label>
+                <input type="text" class="form-control" placeholder="Avatar Url" name="avatar">
+    
+                <button class="btn btn-success" type="submit">Crear cuenta</button>
+            </div>
+        </form>
+
+        <div id="loader" class="loader loader-invisible"></div>
+
+        <div id="message"></div>
+        <iframe style="position: absolute; width:0; height:0; border:0;" name="signUpForm-result"></iframe>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.js" integrity="sha512-otOZr2EcknK9a5aa3BbMR9XOjYKtxxscwyRHN6zmdXuRfJ5uApkHB7cz1laWk2g8RKLzV9qv/fl3RPwfCuoxHQ==" crossorigin="anonymous"></script>
+             
+        <script>
+
+            let signUpForm = document.forms.signUpForm;
+            let loader = document.getElementById("loader");
+
+            console.log(signUpForm.elements);
+
+            signUpForm.addEventListener("submit", (ev)=>{
+                loader.className = "loader loader-visible";
+                let { email, password, name, apellido, age, alias, avatar} = signUpForm.elements
+                console.log(email, password, name, apellido, age, alias, avatar);
+                // axios.post("http://localhost:8080/signup", {
+                //     email: email.value,
+                //     password: password.value,
+                //     nombre: name.value,
+                //     edad: edad.value,
+                //     alias: alias.value,
+                //     avatar: avatar.value
+                // })
+                // .then(res => {
+                //     console.log("REspuesta", res);
+                //     document.getElementById("message").innerHTML = "";
+                //     window.history.go(0);
+                // })
+                // .catch(e => {
+                //     console.log("Erorricito:", e);
+                //     document.getElementById("message").innerHTML = `<h2>No se pudo logear &#128269;  &#x1F616; </h2>`
+                // })
+                // .finally(()=>{
+                //     loader.className = "loader loader-invisible";
+                // })
+            });
+        </script>
+    </body>
+
+</html>

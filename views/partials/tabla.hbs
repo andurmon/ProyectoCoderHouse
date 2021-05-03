@@ -1,9 +1,0 @@
-<table id="tablaProductos" class="table table-hover">
-    <tbody>
-        <tr class="table-primary"><th>Titulo</th> <th>Precio</th><th>Imagen</th></tr>
-        {{#each products}}
-            <tr id='{{this._id}}'><td>{{this._id}}. {{this.title}}</td><td>{{this.price}}</td><td><img width="75" src="{{this.thumbnail}}"></img</td></tr>
-        {{/each}}
-    </tbody>
-</table>
-

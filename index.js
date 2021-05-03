@@ -15,8 +15,6 @@ const MongoStore = require("connect-mongo");
 const RedisStore = require("connect-redis")(session);
 const redisClient = require("redis").createClient(6379);
 
-// const handlebars = require('express-handlebars');
-
 // Routers y Middlewares
 const productos = require("./routes/productos");
 const {login} = require("./auth/login");
@@ -27,8 +25,7 @@ const testView = require("./routes/test.view");
 
 //Passport
 const passport = require("passport");
-const LocalStrategy = require("passport-local").Strategy;
-const { Users } = require("./models/users-model");
+const { loginStrategy, signUpStrategy, serializeUser, deserializeUser } =  require("./auth/passport")
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
@@ -53,45 +50,20 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-passport.use("login", new LocalStrategy(
-    {
-        usernameField: 'email',
-        passwordField: 'password',
-        passReqToCallback: true
-    },
-    (req, username, password, done) => {
-        
-        Users.findOne({email: username})
-            .then(userDocument => {
-                if(!userDocument) return done('Invalid Email');
+passport.use("login", loginStrategy);
+passport.use("signup", signUpStrategy)
 
-                const passwordsMatch = password === userDocument.password;
-                if (!passwordsMatch) return done('Invalid Password');
-                
-                req.session.username = userDocument.nombre;
-                req.session.email = userDocument.email;
+passport.serializeUser( serializeUser );
+passport.deserializeUser( deserializeUser );
 
-                return done(null, userDocument); 
-            })
-            .catch ((error) => {
-                done("Mail not found, please Sign Up" + error);
-            })
-      }
-))
-
-passport.serializeUser((user, done) => {
-    done(null, user._id);
-});
-  
-passport.deserializeUser((id, done) => {
-    Users.findById(id, (err, user) => {
-        done(err, user);
-    });
-});
-
-// app.post("/login", login);
 app.post("/login", passport.authenticate("login", {failureRedirect: '/login'} ), (req, res) => {
-    res.redirect("/")
+    console.log("Hi");
+    res.redirect("/productos/vista")
+});
+
+app.post("/signup", passport.authenticate("signup", {failureRedirect: '/signup'}), (req, res) => {
+    console.log("Request Body: ", req.body);
+    res.redirect("login")
 });
 
 app.post("/logout", (req, res)=>{
@@ -99,15 +71,29 @@ app.post("/logout", (req, res)=>{
     res.send("Logout")
 });
 
-app.set("views", "./views");
+// Vistas - Front End desde el servidor
+app.set("views", "./public/views");
 app.set("view engine", "ejs");
 
 app.get("/", (req, res) =>  res.redirect("/productos/vista") );
 
+app.get("/login", (req, res) => {
+    if (!req.isAuthenticated()){
+        // res.sendFile(__dirname + '/public/logIn.html');
+        res.render("layouts/logIn")
+        return;
+    }
+    res.redirect("/productos/vista");
+});
+
+app.get("/signup", (req, res) => {
+    res.render("layouts/signup")
+})
+
 app.get('/agregar', (req, res)=>{
 
     if(!req.isAuthenticated()){
-        res.sendFile(__dirname + '/public/logIn.html');
+        res.redirect("/login");
         return;
     }
     res.sendFile(__dirname + '/public/agregarProducto.html');
@@ -116,7 +102,7 @@ app.get('/agregar', (req, res)=>{
 app.get('/productos/vista', (req, res)=> {
 
     if(!req.isAuthenticated()){
-        res.sendFile(__dirname + '/public/logIn.html');
+        res.redirect("/login");
         return;
     }
     engine(req, res);
@@ -125,10 +111,6 @@ app.get('/productos/vista', (req, res)=> {
 app.use('/productos/vista-test', testView);
 
 app.get('/chat', (req, res)=> res.sendFile(__dirname + '/public/chat.html'));
-
-// app.get('/styles/chat.css', (req, res)=>{
-//     res.sendFile(__dirname + '/public/styles/chat.css');
-// });
 
 // REST API
 app.use("/api/products", productos);

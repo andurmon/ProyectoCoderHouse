@@ -2,7 +2,7 @@
 // const {getProductos} = require("../persistencia/mysql.js");
 const {getProductos} = require("../persistencia/mongodb.js");
 
-function engine(req, res){
+function engineHbs(req, res){
     getProductos()
         .then((pdtos) => {
             console.log("pdtos: ", pdtos)
@@ -23,13 +23,12 @@ async function engineEJS(req, res){
         .catch(error => {
             console.log("Error: ", error);
             data = {isOk: false, username: null, products: [], error: error};
-        });
-
-    res.render('layouts/index', data)
-
+        })
+        .finally(() => {
+            res.render('layouts/index', data)
+        })
 }
 
 module.exports = {
-    engineHbs: engine,
     engineEJS: engineEJS
 }
