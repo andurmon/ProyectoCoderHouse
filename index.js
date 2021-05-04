@@ -26,6 +26,7 @@ const testView = require("./routes/test.view");
 //Passport
 const passport = require("passport");
 const { loginStrategy, signUpStrategy, serializeUser, deserializeUser } =  require("./auth/passport")
+const { loginStrategy: FacebookStrategy } = require("./auth/passportFacebook");
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
@@ -51,12 +52,18 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 passport.use("login", loginStrategy);
-passport.use("signup", signUpStrategy)
+passport.use("signup", signUpStrategy);
+passport.use("login-facebook", FacebookStrategy);
 
 passport.serializeUser( serializeUser );
 passport.deserializeUser( deserializeUser );
 
 app.post("/login", passport.authenticate("login", {failureRedirect: '/login'} ), (req, res) => {
+    console.log("Hi");
+    res.redirect("/productos/vista")
+});
+
+app.post("/login-facebook", passport.authenticate("login-facebook", {failureRedirect: '/login'} ), (req, res) => {
     console.log("Hi");
     res.redirect("/productos/vista")
 });
