@@ -2,10 +2,10 @@ const mongoose = require("mongoose")
 
 //Conexion a la base de datos
 // let rutaBD = "mongodb://localhost/ecommerce"
-let rutaBD = "mongodb+srv://andurmon:admin@cluster0.4b6ca.mongodb.net/ecommerce?retryWrites=true&w=majority"
+let rutaBD = process.env.MONGO_URL
 
 mongoose.connect(rutaBD, {useNewUrlParser: true, useUnifiedTopology: true})
-    .then(()=>console.log("Se conecto a la BD"))
+    .then((f)=>console.log("Se conecto a la BD MongoDB cluter0 en Mongo Atlas =>", f.connections[0].name))
     .catch((err)=>console.log("Error al conectarse a la BD: ", err))
 
 const {Productos: Model} = require("../models/productos-model");

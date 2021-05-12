@@ -1,21 +1,23 @@
+require("dotenv").config();
+
 //Passport
 const passport = require("passport");
 const FacebookStrategy = require("passport-facebook").Strategy;
 const { Users } = require("../models/users-model");
 
-const FACEBOOK_APP_ID = "2982625835302934";
-const FACEBOOK_APP_SECRET = "cd9f8048ee2e534d68751630056435c9";
-
 const loginStrategy = new FacebookStrategy(
     {
-        clientID: FACEBOOK_APP_ID,
-        clientSecret: FACEBOOK_APP_SECRET,
-        callbackURL: "http://localhost:8080/login",
+        clientID: process.argv[2]? process.argv[2] : process.env.FACEBOOK_APP_ID,
+        clientSecret: process.argv[3]? process.argv[3] : process.env.FACEBOOK_APP_SECRET,
+        callbackURL: "http://localhost:8080/productos/vista",
+        // callbackURL: "http://localhost:8080/login",
         profileFields: ['id', 'displayName', 'photos', 'email']
     },
-    (req, username, password, done) => {
+    (accessToken, refreshToken, profile, done) => {
         
-        Users.findOne({email: username})
+        const findOrCreate = () => {
+            console.log(accessToken, refreshToken, profile);
+            Users.findOne({email: username})
             .then(userDocument => {
                 if(!userDocument) return done('Invalid Email');
 
@@ -28,16 +30,18 @@ const loginStrategy = new FacebookStrategy(
                 return done(null, userDocument); 
             })
             .catch ((error) => {
-                done("Mail not found, please Sign Up" + error);
+                done(error);
             })
         }
+        process.nextTick(findOrCreate)
+    }
 )
 
 
 const signUpStrategy = new FacebookStrategy(
     {
-        clientID: FACEBOOK_APP_ID,
-        clientSecret: FACEBOOK_APP_SECRET,
+        clientID:       process.argv[2]? process.argv[2] : process.env.FACEBOOK_APP_ID,
+        clientSecret:   process.argv[3]? process.argv[3] : process.env.FACEBOOK_APP_SECRET,
         callbackURL: "http://localhost:8080/sigup",
         profileFields: ['id', 'displayName', 'photos', 'email']
     },

@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const PORT = process.env.PORT || 8080;
 
 const bcrypt = require("bcrypt")
@@ -17,7 +19,6 @@ const redisClient = require("redis").createClient(6379);
 
 // Routers y Middlewares
 const productos = require("./routes/productos");
-const {login} = require("./auth/login");
 
 // Vistas y Motores de Plantilla
 const {engineEJS: engine} = require("./routes/engine");
@@ -41,7 +42,7 @@ app.use(session({
     //     ttl: 300
     // }),
     store: MongoStore.create({
-        mongoUrl: "mongodb+srv://andurmon:admin@cluster0.4b6ca.mongodb.net/ecommerce?retryWrites=true&w=majority",
+        mongoUrl: process.env.MONGO_URL,
         mongoOptions: {useNewUrlParser: true, useUnifiedTopology: true},
         ttl: 10 * 60
     }),
@@ -53,7 +54,7 @@ app.use(passport.session());
 
 passport.use("login", loginStrategy);
 passport.use("signup", signUpStrategy);
-passport.use("login-facebook", FacebookStrategy);
+passport.use(FacebookStrategy);
 
 passport.serializeUser( serializeUser );
 passport.deserializeUser( deserializeUser );
@@ -63,7 +64,7 @@ app.post("/login", passport.authenticate("login", {failureRedirect: '/login'} ),
     res.redirect("/productos/vista")
 });
 
-app.post("/login-facebook", passport.authenticate("login-facebook", {failureRedirect: '/login'} ), (req, res) => {
+app.post("/login-facebook", passport.authenticate("facebook", {failureRedirect: '/fail'} ), (req, res) => {
     console.log("Hi");
     res.redirect("/productos/vista")
 });
@@ -122,6 +123,28 @@ app.get('/chat', (req, res)=> res.sendFile(__dirname + '/public/chat.html'));
 // REST API
 app.use("/api/products", productos);
 
+app.get('/info', (req, res) => {
+    res.render("layouts/infoProcess", process);
+});
+
+const {fork} = require("child_process");
+app.get('/randoms/:cantidad', (req, res) =>{
+    
+    // let cantidad = req.params.cantidad, min = 1, max = 1000; 
+    // let random = () => Math.floor(Math.random() * (+max - +min) + +min);
+    console.log(__dirname + "\\child-processes\\random.js");
+    const forked = fork(__dirname + "\\child-processes\\random.js");
+    forked.on("message", msg =>{
+        res.send(msg)
+    })
+
+});
+
 http.listen(PORT, ()=>{
     console.log(`Escuchando en el Puerto: ${PORT}`);
+    console.log("Argumentos del proceso", process.argv);
 });
+
+process.on("beforeExit", (coce) => {
+    console.log('Process Before Exit', code);
+})
