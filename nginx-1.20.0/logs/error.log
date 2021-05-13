@@ -1,0 +1,1 @@
+2021/05/13 10:37:48 [error] 2560#6452: *1 CreateFile() "C:\nginx-1.20.0/html/favicon.ico" failed (2: El sistema no puede encontrar el archivo especificado), client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "localhost", referrer: "http://localhost/"

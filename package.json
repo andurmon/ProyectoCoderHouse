@@ -5,7 +5,8 @@
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "nodemon index.js"
+        "start": "nodemon index.js",
+        "prod": "forever index.js"
     },
     "keywords": [],
     "author": "",
@@ -22,6 +23,7 @@
         "express-handlebars": "^5.2.0",
         "express-session": "^1.17.1",
         "faker": "^5.5.2",
+        "forever": "^3.0.4",
         "knex": "^0.95.2",
         "mongoose": "^5.12.2",
         "mysql": "^2.18.1",
