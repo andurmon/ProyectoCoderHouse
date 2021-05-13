@@ -7,8 +7,8 @@ const { Users } = require("../models/users-model");
 
 const loginStrategy = new FacebookStrategy(
     {
-        clientID: process.argv[2]? process.argv[2] : process.env.FACEBOOK_APP_ID,
-        clientSecret: process.argv[3]? process.argv[3] : process.env.FACEBOOK_APP_SECRET,
+        clientID: process.env.FACEBOOK_APP_ID,
+        clientSecret: process.env.FACEBOOK_APP_SECRET,
         callbackURL: "http://localhost:8080/productos/vista",
         // callbackURL: "http://localhost:8080/login",
         profileFields: ['id', 'displayName', 'photos', 'email']
@@ -40,8 +40,8 @@ const loginStrategy = new FacebookStrategy(
 
 const signUpStrategy = new FacebookStrategy(
     {
-        clientID:       process.argv[2]? process.argv[2] : process.env.FACEBOOK_APP_ID,
-        clientSecret:   process.argv[3]? process.argv[3] : process.env.FACEBOOK_APP_SECRET,
+        clientID:       process.env.FACEBOOK_APP_ID,
+        clientSecret:   process.env.FACEBOOK_APP_SECRET,
         callbackURL: "http://localhost:8080/sigup",
         profileFields: ['id', 'displayName', 'photos', 'email']
     },

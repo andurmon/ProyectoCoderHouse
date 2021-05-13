@@ -1,150 +1,31 @@
-require("dotenv").config();
+const { fork } = require("child_process");
+const cluster = require('cluster') /* https://nodejs.org/dist/latest-v14.x/docs/api/cluster.html */
 
-const PORT = process.env.PORT || 8080;
+const numCPUs = require('os').cpus().length
 
-const bcrypt = require("bcrypt")
-const cookieParser = require("cookie-parser");
-const session = require("express-session");
+if ( !process.argv[2] | process.argv[2]==="FORK"){
+    console.log("FORK !!!");
+    const forked = fork("./server.js");
+    forked.send('start')
 
-const express = require("express");
-const app = express();
-const http = require("http").createServer(app);
-const io = require("socket.io")(http);
-require("./sockets/sockets")(io)
+} else if (process.argv[2]==="CLUSTER"){
 
-// Storage de Sesiones
-const MongoStore = require("connect-mongo");
-const RedisStore = require("connect-redis")(session);
-const redisClient = require("redis").createClient(6379);
-
-// Routers y Middlewares
-const productos = require("./routes/productos");
-
-// Vistas y Motores de Plantilla
-const {engineEJS: engine} = require("./routes/engine");
-const testView = require("./routes/test.view");
-
-//Passport
-const passport = require("passport");
-const { loginStrategy, signUpStrategy, serializeUser, deserializeUser } =  require("./auth/passport")
-const { loginStrategy: FacebookStrategy } = require("./auth/passportFacebook");
-
-app.use(express.json());
-app.use(express.urlencoded({extended:true}));
-app.use(cookieParser());
-app.use(express.static("public"));
-app.use(session({
-    secret: "Secret",
-    // store: new RedisStore({
-    //     host: "localhost",
-    //     port: 6379,
-    //     client: redisClient,
-    //     ttl: 300
-    // }),
-    store: MongoStore.create({
-        mongoUrl: process.env.MONGO_URL,
-        mongoOptions: {useNewUrlParser: true, useUnifiedTopology: true},
-        ttl: 10 * 60
-    }),
-    resave: false,
-    saveUninitialized: false
-}));
-app.use(passport.initialize());
-app.use(passport.session());
-
-passport.use("login", loginStrategy);
-passport.use("signup", signUpStrategy);
-passport.use(FacebookStrategy);
-
-passport.serializeUser( serializeUser );
-passport.deserializeUser( deserializeUser );
-
-app.post("/login", passport.authenticate("login", {failureRedirect: '/login'} ), (req, res) => {
-    console.log("Hi");
-    res.redirect("/productos/vista")
-});
-
-app.post("/login-facebook", passport.authenticate("facebook", {failureRedirect: '/fail'} ), (req, res) => {
-    console.log("Hi");
-    res.redirect("/productos/vista")
-});
-
-app.post("/signup", passport.authenticate("signup", {failureRedirect: '/signup'}), (req, res) => {
-    console.log("Request Body: ", req.body);
-    res.redirect("login")
-});
-
-app.post("/logout", (req, res)=>{
-    req.logout();
-    res.send("Logout")
-});
-
-// Vistas - Front End desde el servidor
-app.set("views", "./public/views");
-app.set("view engine", "ejs");
-
-app.get("/", (req, res) =>  res.redirect("/productos/vista") );
-
-app.get("/login", (req, res) => {
-    if (!req.isAuthenticated()){
-        // res.sendFile(__dirname + '/public/logIn.html');
-        res.render("layouts/logIn")
-        return;
-    }
-    res.redirect("/productos/vista");
-});
-
-app.get("/signup", (req, res) => {
-    res.render("layouts/signup")
-})
-
-app.get('/agregar', (req, res)=>{
-
-    if(!req.isAuthenticated()){
-        res.redirect("/login");
-        return;
-    }
-    res.sendFile(__dirname + '/public/agregarProducto.html');
-});
-
-app.get('/productos/vista', (req, res)=> {
-
-    if(!req.isAuthenticated()){
-        res.redirect("/login");
-        return;
-    }
-    engine(req, res);
-});
-
-app.use('/productos/vista-test', testView);
-
-app.get('/chat', (req, res)=> res.sendFile(__dirname + '/public/chat.html'));
-
-// REST API
-app.use("/api/products", productos);
-
-app.get('/info', (req, res) => {
-    res.render("layouts/infoProcess", process);
-});
-
-const {fork} = require("child_process");
-app.get('/randoms/:cantidad', (req, res) =>{
+    if(cluster.isMaster) {
+        console.log(numCPUs)
+        console.log(`PID MASTER ${process.pid}`)
     
-    // let cantidad = req.params.cantidad, min = 1, max = 1000; 
-    // let random = () => Math.floor(Math.random() * (+max - +min) + +min);
-    console.log(__dirname + "\\child-processes\\random.js");
-    const forked = fork(__dirname + "\\child-processes\\random.js");
-    forked.on("message", msg =>{
-        res.send(msg)
-    })
-
-});
-
-http.listen(PORT, ()=>{
-    console.log(`Escuchando en el Puerto: ${PORT}`);
-    console.log("Argumentos del proceso", process.argv);
-});
-
-process.on("beforeExit", (coce) => {
-    console.log('Process Before Exit', code);
-})
+        for(let i=0; i<numCPUs; i++) {
+            cluster.fork()
+        }
+    
+        cluster.on('exit', worker => {
+            console.log('Worker', worker.process.pid, 'died', new Date().toLocaleString())
+            cluster.fork()
+        })
+    }
+    /* --------------------------------------------------------------------------- */
+    /* WORKERS */
+    else {
+        require("./server.js")
+    }
+}
