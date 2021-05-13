@@ -20,7 +20,7 @@ if ( !process.argv[2] | process.argv[2]==="FORK"){
     
         cluster.on('exit', worker => {
             console.log('Worker', worker.process.pid, 'died', new Date().toLocaleString())
-            cluster.fork()
+            cluster.fork() 
         })
     }
     /* --------------------------------------------------------------------------- */
