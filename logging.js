@@ -26,13 +26,6 @@ if(process.env.NODE_ENV === "PRD"){
     logger.level = "trace"
 }
 
-logger.trace("Treis");
-logger.debug("debug")
-logger.info("Info")
-logger.warn("Guarn")
-logger.error(" error")
-logger.fatal("feiral")
-
 module.exports = {
     log4js: log4js,
     logger: logger

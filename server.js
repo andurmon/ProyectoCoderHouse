@@ -1,7 +1,7 @@
 require("dotenv").config();
 
 const { logger } = require("./logging.js");
-logger.error("Suxion")
+logger.trace("Suxion")
 const PORT = process.env.PORT || 8080;
 
 const bcrypt = require("bcrypt")

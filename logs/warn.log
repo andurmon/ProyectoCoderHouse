@@ -1,1 +1,255 @@
 
+[2021-05-17T17:15:48.460] [TRACE] default - 8
+[2021-05-17T17:15:48.465] [TRACE] default - PID MASTER 9528
+[2021-05-17T17:15:48.804] [TRACE] default - Treis
+[2021-05-17T17:15:48.804] [DEBUG] default - debug
+[2021-05-17T17:15:48.805] [INFO] default - Info
+[2021-05-17T17:15:48.805] [WARN] default - Guarn
+[2021-05-17T17:15:48.805] [ERROR] default -  error
+[2021-05-17T17:15:48.805] [FATAL] default - feiral
+[2021-05-17T17:15:48.805] [ERROR] default - Suxion
+[2021-05-17T17:15:48.818] [TRACE] default - Treis
+[2021-05-17T17:15:48.819] [DEBUG] default - debug
+[2021-05-17T17:15:48.819] [INFO] default - Info
+[2021-05-17T17:15:48.819] [WARN] default - Guarn
+[2021-05-17T17:15:48.820] [ERROR] default -  error
+[2021-05-17T17:15:48.820] [FATAL] default - feiral
+[2021-05-17T17:15:48.820] [ERROR] default - Suxion
+[2021-05-17T17:15:48.856] [TRACE] default - Treis
+[2021-05-17T17:15:48.857] [DEBUG] default - debug
+[2021-05-17T17:15:48.857] [INFO] default - Info
+[2021-05-17T17:15:48.858] [WARN] default - Guarn
+[2021-05-17T17:15:48.858] [ERROR] default -  error
+[2021-05-17T17:15:48.858] [FATAL] default - feiral
+[2021-05-17T17:15:48.858] [ERROR] default - Suxion
+[2021-05-17T17:15:48.878] [TRACE] default - Treis
+[2021-05-17T17:15:48.879] [DEBUG] default - debug
+[2021-05-17T17:15:48.879] [INFO] default - Info
+[2021-05-17T17:15:48.879] [WARN] default - Guarn
+[2021-05-17T17:15:48.880] [ERROR] default -  error
+[2021-05-17T17:15:48.880] [FATAL] default - feiral
+[2021-05-17T17:15:48.880] [ERROR] default - Suxion
+[2021-05-17T17:15:48.914] [TRACE] default - Treis
+[2021-05-17T17:15:48.915] [DEBUG] default - debug
+[2021-05-17T17:15:48.915] [INFO] default - Info
+[2021-05-17T17:15:48.915] [WARN] default - Guarn
+[2021-05-17T17:15:48.915] [ERROR] default -  error
+[2021-05-17T17:15:48.915] [FATAL] default - feiral
+[2021-05-17T17:15:48.916] [ERROR] default - Suxion
+[2021-05-17T17:15:48.936] [TRACE] default - Treis
+[2021-05-17T17:15:48.936] [DEBUG] default - debug
+[2021-05-17T17:15:48.937] [INFO] default - Info
+[2021-05-17T17:15:48.937] [WARN] default - Guarn
+[2021-05-17T17:15:48.937] [ERROR] default -  error
+[2021-05-17T17:15:48.937] [FATAL] default - feiral
+[2021-05-17T17:15:48.937] [ERROR] default - Suxion
+[2021-05-17T17:15:48.943] [TRACE] default - Treis
+[2021-05-17T17:15:48.944] [DEBUG] default - debug
+[2021-05-17T17:15:48.944] [INFO] default - Info
+[2021-05-17T17:15:48.944] [WARN] default - Guarn
+[2021-05-17T17:15:48.944] [ERROR] default -  error
+[2021-05-17T17:15:48.945] [FATAL] default - feiral
+[2021-05-17T17:15:48.945] [ERROR] default - Suxion
+[2021-05-17T17:15:48.989] [TRACE] default - Treis
+[2021-05-17T17:15:48.990] [DEBUG] default - debug
+[2021-05-17T17:15:48.990] [INFO] default - Info
+[2021-05-17T17:15:48.990] [WARN] default - Guarn
+[2021-05-17T17:15:48.990] [ERROR] default -  error
+[2021-05-17T17:15:48.990] [FATAL] default - feiral
+[2021-05-17T17:15:48.991] [ERROR] default - Suxion
+[2021-05-17T17:15:58.422] [INFO] default - Servidor express escuchando en el puerto 8080 - PID WORKER 12832
+[2021-05-17T17:15:58.520] [INFO] default - Servidor express escuchando en el puerto 8080 - PID WORKER 13152
+[2021-05-17T17:15:58.544] [INFO] default - Servidor express escuchando en el puerto 8080 - PID WORKER 12004
+[2021-05-17T17:15:58.599] [INFO] default - Servidor express escuchando en el puerto 8080 - PID WORKER 13188
+[2021-05-17T17:15:58.642] [INFO] default - Servidor express escuchando en el puerto 8080 - PID WORKER 6256
+[2021-05-17T17:15:58.711] [INFO] default - Servidor express escuchando en el puerto 8080 - PID WORKER 8616
+[2021-05-17T17:15:58.751] [INFO] default - Servidor express escuchando en el puerto 8080 - PID WORKER 10456
+[2021-05-17T17:15:58.821] [INFO] default - Servidor express escuchando en el puerto 8080 - PID WORKER 10284
+[2021-05-17T17:16:00.082] [INFO] default - Se conecto a la BD MongoDB cluter0 en Mongo Atlas => ecommerce
+[2021-05-17T17:16:00.142] [INFO] default - Se conecto a la BD MongoDB cluter0 en Mongo Atlas => ecommerce
+[2021-05-17T17:16:00.160] [INFO] default - Se conecto a la BD MongoDB cluter0 en Mongo Atlas => ecommerce
+[2021-05-17T17:16:00.178] [INFO] default - Se conecto a la BD MongoDB cluter0 en Mongo Atlas => ecommerce
+[2021-05-17T17:16:00.215] [INFO] default - Se conecto a la BD MongoDB cluter0 en Mongo Atlas => ecommerce
+[2021-05-17T17:16:00.250] [INFO] default - Se conecto a la BD MongoDB cluter0 en Mongo Atlas => ecommerce
+[2021-05-17T17:16:01.037] [INFO] default - Se conecto a la BD MongoDB cluter0 en Mongo Atlas => ecommerce
+[2021-05-17T17:16:05.083] [INFO] default - Se conecto a la BD MongoDB cluter0 en Mongo Atlas => ecommerce
+[2021-05-17T17:16:23.244] [TRACE] default - 8
+[2021-05-17T17:16:23.248] [TRACE] default - PID MASTER 10516
+[2021-05-17T17:16:25.907] [TRACE] default - Treis
+[2021-05-17T17:16:25.908] [DEBUG] default - debug
+[2021-05-17T17:16:25.908] [INFO] default - Info
+[2021-05-17T17:16:25.908] [WARN] default - Guarn
+[2021-05-17T17:16:25.908] [ERROR] default -  error
+[2021-05-17T17:16:25.908] [FATAL] default - feiral
+[2021-05-17T17:16:25.927] [TRACE] default - Treis
+[2021-05-17T17:16:25.928] [DEBUG] default - debug
+[2021-05-17T17:16:25.928] [INFO] default - Info
+[2021-05-17T17:16:25.928] [WARN] default - Guarn
+[2021-05-17T17:16:25.928] [ERROR] default -  error
+[2021-05-17T17:16:25.929] [FATAL] default - feiral
+[2021-05-17T17:16:25.934] [TRACE] default - Treis
+[2021-05-17T17:16:25.935] [DEBUG] default - debug
+[2021-05-17T17:16:25.935] [INFO] default - Info
+[2021-05-17T17:16:25.935] [WARN] default - Guarn
+[2021-05-17T17:16:25.935] [ERROR] default -  error
+[2021-05-17T17:16:25.935] [FATAL] default - feiral
+[2021-05-17T17:16:25.951] [TRACE] default - Treis
+[2021-05-17T17:16:25.952] [DEBUG] default - debug
+[2021-05-17T17:16:25.952] [INFO] default - Info
+[2021-05-17T17:16:25.954] [WARN] default - Guarn
+[2021-05-17T17:16:25.955] [ERROR] default -  error
+[2021-05-17T17:16:25.955] [FATAL] default - feiral
+[2021-05-17T17:16:26.047] [TRACE] default - Treis
+[2021-05-17T17:16:26.062] [DEBUG] default - debug
+[2021-05-17T17:16:26.062] [INFO] default - Info
+[2021-05-17T17:16:26.062] [WARN] default - Guarn
+[2021-05-17T17:16:26.062] [ERROR] default -  error
+[2021-05-17T17:16:26.062] [FATAL] default - feiral
+[2021-05-17T17:16:26.113] [TRACE] default - Treis
+[2021-05-17T17:16:26.114] [DEBUG] default - debug
+[2021-05-17T17:16:26.114] [INFO] default - Info
+[2021-05-17T17:16:26.114] [WARN] default - Guarn
+[2021-05-17T17:16:26.115] [ERROR] default -  error
+[2021-05-17T17:16:26.115] [FATAL] default - feiral
+[2021-05-17T17:16:26.241] [TRACE] default - Treis
+[2021-05-17T17:16:26.242] [DEBUG] default - debug
+[2021-05-17T17:16:26.242] [INFO] default - Info
+[2021-05-17T17:16:26.243] [WARN] default - Guarn
+[2021-05-17T17:16:26.243] [ERROR] default -  error
+[2021-05-17T17:16:26.243] [FATAL] default - feiral
+[2021-05-17T17:16:26.290] [TRACE] default - Treis
+[2021-05-17T17:16:26.291] [DEBUG] default - debug
+[2021-05-17T17:16:26.291] [INFO] default - Info
+[2021-05-17T17:16:26.291] [WARN] default - Guarn
+[2021-05-17T17:16:26.292] [ERROR] default -  error
+[2021-05-17T17:16:26.292] [FATAL] default - feiral
+[2021-05-17T17:16:30.349] [INFO] default - Worker 16508 died 17/5/2021, 5:16:29 p. m.
+[2021-05-17T17:16:30.637] [INFO] default - Worker 8652 died 17/5/2021, 5:16:30 p. m.
+[2021-05-17T17:16:31.560] [INFO] default - Worker 15136 died 17/5/2021, 5:16:31 p. m.
+[2021-05-17T17:16:31.972] [INFO] default - Worker 10872 died 17/5/2021, 5:16:31 p. m.
+[2021-05-17T17:16:32.446] [INFO] default - Worker 3416 died 17/5/2021, 5:16:32 p. m.
+[2021-05-17T17:16:32.823] [INFO] default - Worker 16936 died 17/5/2021, 5:16:32 p. m.
+[2021-05-17T17:16:33.255] [INFO] default - Worker 5740 died 17/5/2021, 5:16:33 p. m.
+[2021-05-17T17:16:34.680] [INFO] default - Worker 3224 died 17/5/2021, 5:16:34 p. m.
+[2021-05-17T17:16:35.641] [INFO] default - Worker 10008 died 17/5/2021, 5:16:35 p. m.
+[2021-05-17T17:16:35.668] [INFO] default - Worker 15000 died 17/5/2021, 5:16:35 p. m.
+[2021-05-17T17:16:35.730] [INFO] default - Worker 9284 died 17/5/2021, 5:16:35 p. m.
+[2021-05-17T17:16:35.776] [INFO] default - Worker 4140 died 17/5/2021, 5:16:35 p. m.
+[2021-05-17T17:16:36.385] [TRACE] default - 8
+[2021-05-17T17:16:36.390] [TRACE] default - PID MASTER 4868
+[2021-05-17T17:16:41.185] [INFO] default - Worker 3900 died 17/5/2021, 5:16:41 p. m.
+[2021-05-17T17:16:41.342] [INFO] default - Worker 16780 died 17/5/2021, 5:16:41 p. m.
+[2021-05-17T17:16:41.364] [INFO] default - Worker 16544 died 17/5/2021, 5:16:41 p. m.
+[2021-05-17T17:16:41.418] [INFO] default - Worker 16716 died 17/5/2021, 5:16:41 p. m.
+[2021-05-17T17:16:48.489] [TRACE] default - 8
+[2021-05-17T17:16:48.493] [TRACE] default - PID MASTER 11608
+[2021-05-17T17:16:48.911] [ERROR] default - Suxion
+[2021-05-17T17:16:48.912] [ERROR] default - Suxion
+[2021-05-17T17:16:48.924] [ERROR] default - Suxion
+[2021-05-17T17:16:48.965] [ERROR] default - Suxion
+[2021-05-17T17:16:49.010] [ERROR] default - Suxion
+[2021-05-17T17:16:49.042] [ERROR] default - Suxion
+[2021-05-17T17:16:49.084] [ERROR] default - Suxion
+[2021-05-17T17:16:49.085] [ERROR] default - Suxion
+[2021-05-17T17:16:58.724] [TRACE] default - 8
+[2021-05-17T17:16:58.728] [TRACE] default - PID MASTER 7124
+[2021-05-17T17:16:59.215] [ERROR] default - Suxion
+[2021-05-17T17:16:59.317] [ERROR] default - Suxion
+[2021-05-17T17:16:59.322] [ERROR] default - Suxion
+[2021-05-17T17:16:59.323] [ERROR] default - Suxion
+[2021-05-17T17:16:59.399] [ERROR] default - Suxion
+[2021-05-17T17:16:59.415] [ERROR] default - Suxion
+[2021-05-17T17:16:59.481] [ERROR] default - Suxion
+[2021-05-17T17:16:59.491] [ERROR] default - Suxion
+[2021-05-17T17:17:06.935] [INFO] default - Servidor express escuchando en el puerto 8080 - PID WORKER 5140
+[2021-05-17T17:17:07.129] [INFO] default - Servidor express escuchando en el puerto 8080 - PID WORKER 4608
+[2021-05-17T17:17:07.238] [INFO] default - Servidor express escuchando en el puerto 8080 - PID WORKER 12160
+[2021-05-17T17:17:07.616] [INFO] default - Servidor express escuchando en el puerto 8080 - PID WORKER 15896
+[2021-05-17T17:17:07.813] [INFO] default - Servidor express escuchando en el puerto 8080 - PID WORKER 2820
+[2021-05-17T17:17:07.914] [INFO] default - Servidor express escuchando en el puerto 8080 - PID WORKER 17208
+[2021-05-17T17:17:08.365] [INFO] default - Servidor express escuchando en el puerto 8080 - PID WORKER 7172
+[2021-05-17T17:17:09.439] [INFO] default - Servidor express escuchando en el puerto 8080 - PID WORKER 6112
+[2021-05-17T17:17:10.127] [INFO] default - Se conecto a la BD MongoDB cluter0 en Mongo Atlas => ecommerce
+[2021-05-17T17:17:10.276] [INFO] default - Se conecto a la BD MongoDB cluter0 en Mongo Atlas => ecommerce
+[2021-05-17T17:17:10.595] [INFO] default - Se conecto a la BD MongoDB cluter0 en Mongo Atlas => ecommerce
+[2021-05-17T17:17:10.622] [INFO] default - Se conecto a la BD MongoDB cluter0 en Mongo Atlas => ecommerce
+[2021-05-17T17:17:10.655] [INFO] default - Se conecto a la BD MongoDB cluter0 en Mongo Atlas => ecommerce
+[2021-05-17T17:17:10.666] [INFO] default - Se conecto a la BD MongoDB cluter0 en Mongo Atlas => ecommerce
+[2021-05-17T17:17:10.696] [INFO] default - Se conecto a la BD MongoDB cluter0 en Mongo Atlas => ecommerce
+[2021-05-17T17:17:10.764] [INFO] default - Se conecto a la BD MongoDB cluter0 en Mongo Atlas => ecommerce
+[2021-05-17T17:17:21.314] [TRACE] default - 8
+[2021-05-17T17:17:21.319] [TRACE] default - PID MASTER 15848
+[2021-05-17T17:17:21.767] [TRACE] default - Suxion
+[2021-05-17T17:17:21.775] [TRACE] default - Suxion
+[2021-05-17T17:17:21.813] [TRACE] default - Suxion
+[2021-05-17T17:17:21.818] [TRACE] default - Suxion
+[2021-05-17T17:17:21.904] [TRACE] default - Suxion
+[2021-05-17T17:17:21.931] [TRACE] default - Suxion
+[2021-05-17T17:17:21.948] [TRACE] default - Suxion
+[2021-05-17T17:17:21.950] [TRACE] default - Suxion
+[2021-05-17T17:17:32.083] [INFO] default - Servidor express escuchando en el puerto 8080 - PID WORKER 7636
+[2021-05-17T17:17:32.133] [INFO] default - Servidor express escuchando en el puerto 8080 - PID WORKER 10276
+[2021-05-17T17:17:32.139] [INFO] default - Servidor express escuchando en el puerto 8080 - PID WORKER 12872
+[2021-05-17T17:17:32.187] [INFO] default - Servidor express escuchando en el puerto 8080 - PID WORKER 15436
+[2021-05-17T17:17:32.355] [INFO] default - Servidor express escuchando en el puerto 8080 - PID WORKER 10376
+[2021-05-17T17:17:32.374] [INFO] default - Servidor express escuchando en el puerto 8080 - PID WORKER 13192
+[2021-05-17T17:17:32.386] [INFO] default - Servidor express escuchando en el puerto 8080 - PID WORKER 14260
+[2021-05-17T17:17:32.453] [INFO] default - Servidor express escuchando en el puerto 8080 - PID WORKER 10872
+[2021-05-17T17:17:33.703] [INFO] default - Se conecto a la BD MongoDB cluter0 en Mongo Atlas => ecommerce
+[2021-05-17T17:17:33.842] [INFO] default - Se conecto a la BD MongoDB cluter0 en Mongo Atlas => ecommerce
+[2021-05-17T17:17:33.849] [INFO] default - Se conecto a la BD MongoDB cluter0 en Mongo Atlas => ecommerce
+[2021-05-17T17:17:33.850] [INFO] default - Se conecto a la BD MongoDB cluter0 en Mongo Atlas => ecommerce
+[2021-05-17T17:17:33.852] [INFO] default - Se conecto a la BD MongoDB cluter0 en Mongo Atlas => ecommerce
+[2021-05-17T17:17:33.870] [INFO] default - Se conecto a la BD MongoDB cluter0 en Mongo Atlas => ecommerce
+[2021-05-17T17:17:33.940] [INFO] default - Se conecto a la BD MongoDB cluter0 en Mongo Atlas => ecommerce
+[2021-05-17T17:17:33.960] [INFO] default - Se conecto a la BD MongoDB cluter0 en Mongo Atlas => ecommerce
+[2021-05-17T17:17:51.330] [TRACE] default - 8
+[2021-05-17T17:17:51.334] [TRACE] default - PID MASTER 16780
+[2021-05-17T17:17:51.762] [INFO] default - Worker 15992 died 17/5/2021, 5:17:51 p. m.
+[2021-05-17T17:17:51.786] [INFO] default - Worker 10572 died 17/5/2021, 5:17:51 p. m.
+[2021-05-17T17:17:51.809] [INFO] default - Worker 8956 died 17/5/2021, 5:17:51 p. m.
+[2021-05-17T17:17:51.837] [INFO] default - Worker 7788 died 17/5/2021, 5:17:51 p. m.
+[2021-05-17T17:17:51.864] [INFO] default - Worker 6140 died 17/5/2021, 5:17:51 p. m.
+[2021-05-17T17:17:51.893] [INFO] default - Worker 12004 died 17/5/2021, 5:17:51 p. m.
+[2021-05-17T17:17:51.921] [INFO] default - Worker 16984 died 17/5/2021, 5:17:51 p. m.
+[2021-05-17T17:17:51.943] [INFO] default - Worker 13188 died 17/5/2021, 5:17:51 p. m.
+[2021-05-17T17:17:52.408] [INFO] default - Worker 8372 died 17/5/2021, 5:17:52 p. m.
+[2021-05-17T17:17:52.427] [INFO] default - Worker 2000 died 17/5/2021, 5:17:52 p. m.
+[2021-05-17T17:17:52.504] [INFO] default - Worker 6384 died 17/5/2021, 5:17:52 p. m.
+[2021-05-17T17:17:52.524] [INFO] default - Worker 17336 died 17/5/2021, 5:17:52 p. m.
+[2021-05-17T17:17:52.549] [INFO] default - Worker 7876 died 17/5/2021, 5:17:52 p. m.
+[2021-05-17T17:17:52.585] [INFO] default - Worker 1504 died 17/5/2021, 5:17:52 p. m.
+[2021-05-17T17:17:52.624] [INFO] default - Worker 8456 died 17/5/2021, 5:17:52 p. m.
+[2021-05-17T17:17:52.654] [INFO] default - Worker 1444 died 17/5/2021, 5:17:52 p. m.
+[2021-05-17T17:17:53.143] [INFO] default - Worker 17400 died 17/5/2021, 5:17:53 p. m.
+[2021-05-17T17:17:53.191] [INFO] default - Worker 1732 died 17/5/2021, 5:17:53 p. m.
+[2021-05-17T17:17:53.249] [INFO] default - Worker 10448 died 17/5/2021, 5:17:53 p. m.
+[2021-05-17T17:17:53.282] [INFO] default - Worker 7792 died 17/5/2021, 5:17:53 p. m.
+[2021-05-17T17:17:53.305] [INFO] default - Worker 2640 died 17/5/2021, 5:17:53 p. m.
+[2021-05-17T17:17:53.358] [INFO] default - Worker 16052 died 17/5/2021, 5:17:53 p. m.
+[2021-05-17T17:17:53.383] [INFO] default - Worker 5732 died 17/5/2021, 5:17:53 p. m.
+[2021-05-17T17:17:53.407] [INFO] default - Worker 17220 died 17/5/2021, 5:17:53 p. m.
+[2021-05-17T17:17:53.795] [INFO] default - Worker 5088 died 17/5/2021, 5:17:53 p. m.
+[2021-05-17T17:17:53.814] [INFO] default - Worker 8956 died 17/5/2021, 5:17:53 p. m.
+[2021-05-17T17:17:53.840] [INFO] default - Worker 11408 died 17/5/2021, 5:17:53 p. m.
+[2021-05-17T17:17:53.925] [INFO] default - Worker 3496 died 17/5/2021, 5:17:53 p. m.
+[2021-05-17T17:17:53.948] [INFO] default - Worker 2100 died 17/5/2021, 5:17:53 p. m.
+[2021-05-17T17:17:54.087] [INFO] default - Worker 2820 died 17/5/2021, 5:17:54 p. m.
+[2021-05-17T17:17:54.106] [INFO] default - Worker 16708 died 17/5/2021, 5:17:54 p. m.
+[2021-05-17T17:17:54.127] [INFO] default - Worker 3904 died 17/5/2021, 5:17:54 p. m.
+[2021-05-17T17:17:54.441] [INFO] default - Worker 3984 died 17/5/2021, 5:17:54 p. m.
+[2021-05-17T17:17:54.478] [INFO] default - Worker 556 died 17/5/2021, 5:17:54 p. m.
+[2021-05-17T17:17:54.504] [INFO] default - Worker 8672 died 17/5/2021, 5:17:54 p. m.
+[2021-05-17T17:17:54.643] [INFO] default - Worker 1444 died 17/5/2021, 5:17:54 p. m.
+[2021-05-17T17:17:54.706] [INFO] default - Worker 15244 died 17/5/2021, 5:17:54 p. m.
+[2021-05-17T17:17:54.746] [INFO] default - Worker 4400 died 17/5/2021, 5:17:54 p. m.
+[2021-05-17T17:17:54.769] [INFO] default - Worker 5152 died 17/5/2021, 5:17:54 p. m.
+[2021-05-17T17:17:54.789] [INFO] default - Worker 4140 died 17/5/2021, 5:17:54 p. m.
+[2021-05-17T17:17:55.139] [INFO] default - Worker 11580 died 17/5/2021, 5:17:55 p. m.
+[2021-05-17T17:17:55.160] [INFO] default - Worker 1660 died 17/5/2021, 5:17:55 p. m.
+[2021-05-17T17:17:55.184] [INFO] default - Worker 1732 died 17/5/2021, 5:17:55 p. m.
+[2021-05-17T17:17:55.371] [INFO] default - Worker 10672 died 17/5/2021, 5:17:55 p. m.
+[2021-05-17T17:17:55.418] [INFO] default - Worker 10448 died 17/5/2021, 5:17:55 p. m.
+[2021-05-17T17:17:55.447] [INFO] default - Worker 17228 died 17/5/2021, 5:17:55 p. m.
+[2021-05-17T17:17:55.471] [INFO] default - Worker 6932 died 17/5/2021, 5:17:55 p. m.
+[2021-05-17T17:17:55.534] [INFO] default - Worker 16816 died 17/5/2021, 5:17:55 p. m.
