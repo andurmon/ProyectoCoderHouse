@@ -1,28 +1,19 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Info Process</title>
-        <meta charset="utf-8">
-    </head>
-
-    <body>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/slate/bootstrap.min.css" integrity="sha384-8iuq0iaMHpnH2vSyvZMSIqQuUnQA7QM+f6srIdlgBrTSEyd//AWNMyEaSF2yPzNQ" crossorigin="anonymous">
-        <style>
-            table, th, td {
-                border: 1px solid white;
-            }
-        </style>
-        <table>
-            <tr> <th colspan="2">Process</th> </tr>
-            <tr> <th>Argumentos: </th> <td> <%= argv %> </td>  </tr>
-            <tr> <th>Plataforma: </th> <td> <%= platform %> </td> </tr>
-            <tr> <th>Version: </th> <td> <%= version %> </td> </tr>
-            <tr> <th>Uso de Memoria: </th> <td> <%= JSON.stringify(memoryUsage()) %> </td> </tr>
-            <tr> <th>Path de Ejecucion: </th> <td> <%= execPath %> </td> </tr>
-            <tr> <th>Process Id</th> <td> <%= pid%> </td> </tr>
-            <tr> <th>Current Working Directory</th> <td> <%= cwd() %> </td> </tr>
-        </table>
-        
-    </body>
-
-</html>
+<body>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/slate/bootstrap.min.css" integrity="sha384-8iuq0iaMHpnH2vSyvZMSIqQuUnQA7QM+f6srIdlgBrTSEyd//AWNMyEaSF2yPzNQ" crossorigin="anonymous">
+    <style>
+        table, th, td {
+            border: 1px solid white;
+        }
+    </style>
+    <table>
+        <tr> <th colspan="2">Process</th> </tr>
+        <tr> <th>Argumentos: </th> <td> <%= argv %> </td>  </tr>
+        <tr> <th>Plataforma: </th> <td> <%= platform %> </td> </tr>
+        <tr> <th>Version: </th> <td> <%= version %> </td> </tr>
+        <tr> <th>Uso de Memoria: </th> <td> <%= JSON.stringify(memoryUsage()) %> </td> </tr>
+        <tr> <th>Path de Ejecucion: </th> <td> <%= execPath %> </td> </tr>
+        <tr> <th>Process Id</th> <td> <%= pid%> </td> </tr>
+        <tr> <th>Current Working Directory</th> <td> <%= cwd() %> </td> </tr>
+    </table>
+    
+</body>

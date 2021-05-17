@@ -13,7 +13,7 @@ if ( !process.argv[2] | process.argv[2]==="FORK"){
     if(cluster.isMaster) {
         console.log(numCPUs)
         console.log(`PID MASTER ${process.pid}`)
-    
+        
         for(let i=0; i<numCPUs; i++) {
             cluster.fork()
         }

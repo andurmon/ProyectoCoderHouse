@@ -1,5 +1,7 @@
 require("dotenv").config();
 
+const { logger } = require("./logging.js");
+logger.error("Suxion")
 const PORT = process.env.PORT || 8080;
 
 const bcrypt = require("bcrypt")
@@ -14,8 +16,9 @@ require("./sockets/sockets")(io)
 
 // Storage de Sesiones
 const MongoStore = require("connect-mongo");
-const RedisStore = require("connect-redis")(session);
-const redisClient = require("redis").createClient(6379);
+
+let RedisStore = require("connect-redis")(session);;
+let redisClient;
 
 // Routers y Middlewares
 const productos = require("./routes/productos");
@@ -28,6 +31,10 @@ const testView = require("./routes/test.view");
 const passport = require("passport");
 const { loginStrategy, signUpStrategy, serializeUser, deserializeUser } =  require("./auth/passport")
 const { loginStrategy: FacebookStrategy } = require("./auth/passportFacebook");
+
+// COMPRESION GZIP
+const compression = require("compression");
+app.use(compression())
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
@@ -60,17 +67,17 @@ passport.serializeUser( serializeUser );
 passport.deserializeUser( deserializeUser );
 
 app.post("/login", passport.authenticate("login", {failureRedirect: '/login'} ), (req, res) => {
-    console.log("Hi");
+    logger.trace("Hi");
     res.redirect("/productos/vista")
 });
 
 app.post("/login-facebook", passport.authenticate("facebook", {failureRedirect: '/fail'} ), (req, res) => {
-    console.log("Hi");
+    logger.trace("Hi");
     res.redirect("/productos/vista")
 });
 
 app.post("/signup", passport.authenticate("signup", {failureRedirect: '/signup'}), (req, res) => {
-    console.log("Request Body: ", req.body);
+    logger.debug("Request Body: ", req.body);
     res.redirect("login")
 });
 
@@ -141,11 +148,17 @@ app.get('/randoms/:cantidad', (req, res) =>{
 });
 
 http.listen(PORT, ()=>{
-    console.log(`Escuchando en el Puerto: ${PORT}`);
-    console.log(`Servidor express escuchando en el puerto ${PORT} - PID WORKER ${process.pid}`);
-    console.log("Argumentos del proceso", process.argv);
+    logger.info(`Servidor express escuchando en el puerto ${PORT} - PID WORKER ${process.pid}`);
+    // logger.info("Argumentos del proceso", process.argv);
+
+    try{
+        redisClient = require("redis").createClient(6379);
+    }catch(err){
+        logger.error("Error con Redis - ", err);
+    }
+
 });
 
 process.on("beforeExit", (coce) => {
-    console.log('Process Before Exit', code);
+    logger.warn('Process Before Exit', code);
 })

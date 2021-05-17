@@ -1,12 +1,13 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
+const { logger } = require("../logging");
 
 //Conexion a la base de datos
 // let rutaBD = "mongodb://localhost/ecommerce"
 let rutaBD = process.env.MONGO_URL
 
 mongoose.connect(rutaBD, {useNewUrlParser: true, useUnifiedTopology: true})
-    .then((f)=>console.log("Se conecto a la BD MongoDB cluter0 en Mongo Atlas =>", f.connections[0].name))
-    .catch((err)=>console.log("Error al conectarse a la BD: ", err))
+    .then((f)=>logger.info("Se conecto a la BD MongoDB cluter0 en Mongo Atlas =>", f.connections[0].name))
+    .catch((err)=>logger.error("Error al conectarse a la BD: ", err))
 
 const {Productos: Model} = require("../models/productos-model");
 
