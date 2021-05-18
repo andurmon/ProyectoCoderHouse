@@ -1,7 +1,7 @@
 require("dotenv").config();
 
 const { logger } = require("./logging.js");
-logger.trace("Suxion")
+
 const PORT = process.env.PORT || 8080;
 
 const bcrypt = require("bcrypt")
@@ -16,9 +16,6 @@ require("./sockets/sockets")(io)
 
 // Storage de Sesiones
 const MongoStore = require("connect-mongo");
-
-let RedisStore = require("connect-redis")(session);;
-let redisClient;
 
 // Routers y Middlewares
 const productos = require("./routes/productos");
@@ -40,14 +37,9 @@ app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
 app.use(express.static("public"));
+logger.trace(process.env.MONGO_URL)
 app.use(session({
-    secret: "Secret",
-    // store: new RedisStore({
-    //     host: "localhost",
-    //     port: 6379,
-    //     client: redisClient,
-    //     ttl: 300
-    // }),
+    secret: process.env.SECRET,
     store: MongoStore.create({
         mongoUrl: process.env.MONGO_URL,
         mongoOptions: {useNewUrlParser: true, useUnifiedTopology: true},
@@ -150,13 +142,6 @@ app.get('/randoms/:cantidad', (req, res) =>{
 http.listen(PORT, ()=>{
     logger.info(`Servidor express escuchando en el puerto ${PORT} - PID WORKER ${process.pid}`);
     // logger.info("Argumentos del proceso", process.argv);
-
-    try{
-        redisClient = require("redis").createClient(6379);
-    }catch(err){
-        logger.error("Error con Redis - ", err);
-    }
-
 });
 
 process.on("beforeExit", (coce) => {

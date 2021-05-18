@@ -253,3 +253,53 @@
 [2021-05-17T17:17:55.447] [INFO] default - Worker 17228 died 17/5/2021, 5:17:55 p. m.
 [2021-05-17T17:17:55.471] [INFO] default - Worker 6932 died 17/5/2021, 5:17:55 p. m.
 [2021-05-17T17:17:55.534] [INFO] default - Worker 16816 died 17/5/2021, 5:17:55 p. m.
+[2021-05-17T17:18:56.411] [TRACE] default - 8
+[2021-05-17T17:18:56.418] [TRACE] default - PID MASTER 12636
+[2021-05-17T17:18:56.739] [TRACE] default - Suxion
+[2021-05-17T17:18:56.797] [TRACE] default - Suxion
+[2021-05-17T17:18:56.798] [TRACE] default - Suxion
+[2021-05-17T17:18:56.814] [TRACE] default - Suxion
+[2021-05-17T17:18:56.848] [TRACE] default - Suxion
+[2021-05-17T17:18:56.881] [TRACE] default - Suxion
+[2021-05-17T17:18:56.934] [TRACE] default - Suxion
+[2021-05-17T17:18:56.943] [TRACE] default - Suxion
+[2021-05-17T17:19:00.228] [INFO] default - Servidor express escuchando en el puerto 8080 - PID WORKER 12304
+[2021-05-17T17:19:00.294] [INFO] default - Servidor express escuchando en el puerto 8080 - PID WORKER 16892
+[2021-05-17T17:19:00.420] [INFO] default - Servidor express escuchando en el puerto 8080 - PID WORKER 6612
+[2021-05-17T17:19:00.467] [INFO] default - Servidor express escuchando en el puerto 8080 - PID WORKER 16656
+[2021-05-17T17:19:00.804] [INFO] default - Servidor express escuchando en el puerto 8080 - PID WORKER 6512
+[2021-05-17T17:19:01.046] [INFO] default - Servidor express escuchando en el puerto 8080 - PID WORKER 9164
+[2021-05-17T17:19:01.126] [INFO] default - Servidor express escuchando en el puerto 8080 - PID WORKER 1404
+[2021-05-17T17:19:01.667] [INFO] default - Servidor express escuchando en el puerto 8080 - PID WORKER 12944
+[2021-05-17T17:19:03.157] [INFO] default - Se conecto a la BD MongoDB cluter0 en Mongo Atlas => ecommerce
+[2021-05-17T17:19:03.670] [INFO] default - Se conecto a la BD MongoDB cluter0 en Mongo Atlas => ecommerce
+[2021-05-17T17:19:04.128] [INFO] default - Se conecto a la BD MongoDB cluter0 en Mongo Atlas => ecommerce
+[2021-05-17T17:19:04.169] [INFO] default - Se conecto a la BD MongoDB cluter0 en Mongo Atlas => ecommerce
+[2021-05-17T17:19:04.192] [INFO] default - Se conecto a la BD MongoDB cluter0 en Mongo Atlas => ecommerce
+[2021-05-17T17:19:04.235] [INFO] default - Se conecto a la BD MongoDB cluter0 en Mongo Atlas => ecommerce
+[2021-05-17T17:19:04.363] [INFO] default - Se conecto a la BD MongoDB cluter0 en Mongo Atlas => ecommerce
+[2021-05-17T17:19:05.004] [INFO] default - Se conecto a la BD MongoDB cluter0 en Mongo Atlas => ecommerce
+[2021-05-17T20:24:58.710] [TRACE] default - FORK !!!
+[2021-05-17T20:25:09.068] [TRACE] default - FORK !!!
+[2021-05-17T20:25:30.929] [INFO] default - Servidor express escuchando en el puerto 8080 - PID WORKER 21936
+[2021-05-17T20:25:34.903] [INFO] default - Se conecto a la BD MongoDB cluter0 en Mongo Atlas => ecommerce
+[2021-05-17T20:27:04.337] [TRACE] default - FORK !!!
+[2021-05-17T20:27:06.502] [INFO] default - Servidor express escuchando en el puerto 8080 - PID WORKER 21728
+[2021-05-17T20:27:08.638] [INFO] default - Se conecto a la BD MongoDB cluter0 en Mongo Atlas => ecommerce
+[2021-05-17T20:27:31.013] [TRACE] default - FORK !!!
+[2021-05-17T20:45:10.297] [TRACE] default - FORK !!!
+[2021-05-17T20:45:13.120] [INFO] default - Servidor express escuchando en el puerto 8080 - PID WORKER 17944
+[2021-05-17T20:45:14.571] [INFO] default - Se conecto a la BD MongoDB cluter0 en Mongo Atlas => ecommerce
+[2021-05-17T20:45:17.520] [TRACE] default - FORK !!!
+[2021-05-17T20:45:20.302] [INFO] default - Servidor express escuchando en el puerto 8080 - PID WORKER 19500
+[2021-05-17T20:45:21.672] [INFO] default - Se conecto a la BD MongoDB cluter0 en Mongo Atlas => ecommerce
+[2021-05-17T20:45:28.925] [TRACE] default - FORK !!!
+[2021-05-17T20:45:31.405] [INFO] default - Servidor express escuchando en el puerto 8080 - PID WORKER 2268
+[2021-05-17T20:45:32.631] [INFO] default - Se conecto a la BD MongoDB cluter0 en Mongo Atlas => ecommerce
+[2021-05-17T20:46:00.479] [TRACE] default - FORK !!!
+[2021-05-17T20:46:02.910] [INFO] default - Servidor express escuchando en el puerto 8080 - PID WORKER 18580
+[2021-05-17T20:46:04.140] [INFO] default - Se conecto a la BD MongoDB cluter0 en Mongo Atlas => ecommerce
+[2021-05-17T20:46:41.001] [TRACE] default - FORK !!!
+[2021-05-17T20:46:43.161] [TRACE] default - mongodb+srv://andurmon:admin@cluster0.4b6ca.mongodb.net/ecommerce?retryWrites=true&w=majority
+[2021-05-17T20:46:43.183] [INFO] default - Servidor express escuchando en el puerto 8080 - PID WORKER 8240
+[2021-05-17T20:46:44.410] [INFO] default - Se conecto a la BD MongoDB cluter0 en Mongo Atlas => ecommerce
