@@ -15,13 +15,13 @@ module.exports = (io) => {
             .catch(e => console.log(e))
             
         socket.on('add', payload => {
-            axios.post("http://localhost:8080/api/products" , payload)
+            axios.post(`${process.env.SERVER_URL}/api/products`, payload)
                 .then((producto)=>socket.broadcast.emit('added', producto.data))
                 .catch(()=>console.log("No se pudo"))
         })
     
         socket.on('remove', payload => {
-            axios.post(`http://localhost:8080/api/products/${payload}`)
+            axios.post(`${process.env.SERVER_URL}/api/products/${payload}`)
                 .then((producto)=>socket.broadcast.emit('removed', producto.data))
                 .catch(()=>console.log("No se pudo"))
         })

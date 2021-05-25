@@ -1,12 +1,13 @@
 // const {getProductos} = require("../persistencia/archivos.js");
 // const {getProductos} = require("../persistencia/mysql.js");
 const {getProductos} = require("../persistencia/mongodb.js");
+require("dotenv").config()
 
 function engineHbs(req, res){
     getProductos()
         .then((pdtos) => {
             console.log("pdtos: ", pdtos)
-            res.render('partials/tabla', {products: pdtos})
+            res.render('partials/tabla', { url: process.env.SERVER_URL, products: pdtos})
         })
         .catch((error)=>{
             console.log("Error: ", error);
@@ -15,14 +16,14 @@ function engineHbs(req, res){
 }
 
 async function engineEJS(req, res){
-    let data = {isOk: false, username: null, products: [], error:"No se ha cargado"};
+    let data = { url: process.env.SERVER_URL, isOk: false, username: null, products: [], error:"No se ha cargado" };
     await getProductos()
         .then( products => {
-            data = {isOk: true, username: req.session.username, email: req.session.email, products: products, error:""};
+            data = { url: process.env.SERVER_URL, isOk: true, username: req.session.username, email: req.session.email, products: products, error:""};
         })
         .catch(error => {
             console.log("Error: ", error);
-            data = {isOk: false, username: null, products: [], error: error};
+            data = { url: process.env.SERVER_URL, isOk: false, username: null, products: [], error: error};
         })
         .finally(() => {
             res.render('layouts/index', data)

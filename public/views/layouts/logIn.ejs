@@ -50,12 +50,12 @@
             }
 
         </style>
-        <form id="login-facebook" action="http://localhost:8080/login-facebook" method="post" rel="noreferrer" target="_parent">
+        <form id="login-facebook" action="<%= url %>/login-facebook" method="post" rel="noreferrer" target="_parent">
             <button>
                 <img class="img" width="100" alt="" src="https://scontent.feoh1-1.fna.fbcdn.net/v/t39.2365-6/17639236_1785253958471956_282550797298827264_n.png?_nc_cat=105&amp;ccb=1-3&amp;_nc_sid=ad8a9d&amp;_nc_ohc=9QIEz4rgcgcAX_-IiX1&amp;_nc_ht=scontent.feoh1-1.fna&amp;oh=bab4eb2db2cabe4ec6467efc85969414&amp;oe=60B58C16">
             </button>
         </form>
-        <form id="logIn" action="http://localhost:8080/login" method="post" rel="noreferrer" target="_parent" >
+        <form id="logIn" action="<%= url %>/login" method="post" rel="noreferrer" target="_parent" >
             <div class="container">
                 <h1>Inicio de sesion</h1>
                 <hr>
@@ -68,7 +68,7 @@
                 <div class="buttons">
                     <button class="btn btn-success" type="submit">Login</button>
                     <div style="margin-right: 15px;">o bien </div>
-                    <a class="signupAnchor" href="http://localhost:8080/signup">Crear cuenta</a>
+                    <a class="signupAnchor" href="<%= url %>/signup">Crear cuenta</a>
                     <div style="margin-right: 15px;">o bien </div>
                     <button>
                         <img class="img" width="100" alt="" src="https://scontent.feoh1-1.fna.fbcdn.net/v/t39.2365-6/17639236_1785253958471956_282550797298827264_n.png?_nc_cat=105&amp;ccb=1-3&amp;_nc_sid=ad8a9d&amp;_nc_ohc=9QIEz4rgcgcAX_-IiX1&amp;_nc_ht=scontent.feoh1-1.fna&amp;oh=bab4eb2db2cabe4ec6467efc85969414&amp;oe=60B58C16">
@@ -92,7 +92,7 @@
           
            logIn.addEventListener("submit", (ev)=>{
                loader.className = "loader loader-visible";
-            //    axios.post("http://localhost:8080/logIn", {
+            //    axios.post("<%= url %>/login", {
             //        email: logIn.elements.email.value,
             //        password: logIn.elements.password.value
             //    })

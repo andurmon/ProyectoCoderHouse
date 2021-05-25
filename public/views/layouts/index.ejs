@@ -84,7 +84,7 @@
 
         document.getElementById("logOutBtn").addEventListener("click", ev =>{
             loader.className = "loader loader-visible";
-            axios.post("http://localhost:8080/logout")
+            axios.post("<%= url %>/logout")
             .then(res => {
                 console.log("REspuesta", res);
                 window.history.go(0);

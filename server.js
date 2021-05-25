@@ -87,14 +87,14 @@ app.get("/", (req, res) =>  res.redirect("/productos/vista") );
 app.get("/login", (req, res) => {
     if (!req.isAuthenticated()){
         // res.sendFile(__dirname + '/public/logIn.html');
-        res.render("layouts/logIn")
+        res.render("layouts/logIn", {url : process.env.SERVER_URL})
         return;
     }
     res.redirect("/productos/vista");
 });
 
 app.get("/signup", (req, res) => {
-    res.render("layouts/signup")
+    res.render("layouts/signup",  {url : process.env.SERVER_URL})
 })
 
 app.get('/agregar', (req, res)=>{
@@ -126,7 +126,7 @@ app.get('/info', (req, res) => {
     res.render("layouts/infoProcess", process);
 });
 
-const {fork} = require("child_process");
+const { fork } = require("child_process");
 app.get('/randoms/:cantidad', (req, res) =>{
     
     const forked = fork("./child-processes/random.js");

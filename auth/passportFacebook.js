@@ -9,8 +9,8 @@ const loginStrategy = new FacebookStrategy(
     {
         clientID: process.env.FACEBOOK_APP_ID,
         clientSecret: process.env.FACEBOOK_APP_SECRET,
-        callbackURL: "http://localhost:8080/productos/vista",
-        // callbackURL: "http://localhost:8080/login",
+        callbackURL: `${process.env.SERVER_URL}/productos/vista`,
+        // callbackURL: `${process.env.SERVER_URL}/login`,
         profileFields: ['id', 'displayName', 'photos', 'email']
     },
     (accessToken, refreshToken, profile, done) => {
@@ -42,7 +42,7 @@ const signUpStrategy = new FacebookStrategy(
     {
         clientID:       process.env.FACEBOOK_APP_ID,
         clientSecret:   process.env.FACEBOOK_APP_SECRET,
-        callbackURL: "http://localhost:8080/sigup",
+        callbackURL: `${process.env.SERVER_URL}/sigup`,
         profileFields: ['id', 'displayName', 'photos', 'email']
     },
     (req, username, password, done) => {

@@ -303,3 +303,34 @@
 [2021-05-17T20:46:43.161] [TRACE] default - mongodb+srv://andurmon:admin@cluster0.4b6ca.mongodb.net/ecommerce?retryWrites=true&w=majority
 [2021-05-17T20:46:43.183] [INFO] default - Servidor express escuchando en el puerto 8080 - PID WORKER 8240
 [2021-05-17T20:46:44.410] [INFO] default - Se conecto a la BD MongoDB cluter0 en Mongo Atlas => ecommerce
+[2021-05-24T21:51:51.610] [TRACE] default - FORK !!!
+[2021-05-24T22:00:00.479] [TRACE] default - FORK !!!
+[2021-05-24T22:00:26.990] [TRACE] default - mongodb+srv://andurmon:admin@cluster0.4b6ca.mongodb.net/ecommerce?retryWrites=true&w=majority
+[2021-05-24T22:00:27.009] [INFO] default - Servidor express escuchando en el puerto 8080 - PID WORKER 3984
+[2021-05-24T22:00:28.593] [INFO] default - Se conecto a la BD MongoDB cluter0 en Mongo Atlas => ecommerce
+[2021-05-24T22:01:48.275] [TRACE] default - FORK !!!
+[2021-05-24T22:01:50.486] [TRACE] default - mongodb+srv://andurmon:admin@cluster0.4b6ca.mongodb.net/ecommerce?retryWrites=true&w=majority
+[2021-05-24T22:01:50.494] [INFO] default - Servidor express escuchando en el puerto 8080 - PID WORKER 8004
+[2021-05-24T22:01:51.832] [INFO] default - Se conecto a la BD MongoDB cluter0 en Mongo Atlas => ecommerce
+[2021-05-24T22:05:59.390] [TRACE] default - FORK !!!
+[2021-05-24T22:06:01.974] [TRACE] default - mongodb+srv://andurmon:admin@cluster0.4b6ca.mongodb.net/ecommerce?retryWrites=true&w=majority
+[2021-05-24T22:06:01.982] [INFO] default - Servidor express escuchando en el puerto 8080 - PID WORKER 2768
+[2021-05-24T22:06:03.192] [INFO] default - Se conecto a la BD MongoDB cluter0 en Mongo Atlas => ecommerce
+[2021-05-24T22:06:57.370] [TRACE] default - FORK !!!
+[2021-05-24T22:06:59.667] [TRACE] default - mongodb+srv://andurmon:admin@cluster0.4b6ca.mongodb.net/ecommerce?retryWrites=true&w=majority
+[2021-05-24T22:06:59.676] [INFO] default - Servidor express escuchando en el puerto 8080 - PID WORKER 416
+[2021-05-24T22:07:00.891] [INFO] default - Se conecto a la BD MongoDB cluter0 en Mongo Atlas => ecommerce
+[2021-05-24T22:08:36.627] [TRACE] default - FORK !!!
+[2021-05-24T22:08:39.093] [TRACE] default - mongodb+srv://andurmon:admin@cluster0.4b6ca.mongodb.net/ecommerce?retryWrites=true&w=majority
+[2021-05-24T22:08:39.103] [INFO] default - Servidor express escuchando en el puerto 8080 - PID WORKER 1676
+[2021-05-24T22:08:40.714] [INFO] default - Se conecto a la BD MongoDB cluter0 en Mongo Atlas => ecommerce
+[2021-05-24T22:09:00.844] [TRACE] default - Hi
+[2021-05-24T22:10:00.477] [TRACE] default - FORK !!!
+[2021-05-24T22:10:03.097] [TRACE] default - mongodb+srv://andurmon:admin@cluster0.4b6ca.mongodb.net/ecommerce?retryWrites=true&w=majority
+[2021-05-24T22:10:03.116] [INFO] default - Servidor express escuchando en el puerto 8080 - PID WORKER 17728
+[2021-05-24T22:10:04.302] [INFO] default - Se conecto a la BD MongoDB cluter0 en Mongo Atlas => ecommerce
+[2021-05-24T22:10:45.541] [TRACE] default - FORK !!!
+[2021-05-24T22:10:47.663] [TRACE] default - mongodb+srv://andurmon:admin@cluster0.4b6ca.mongodb.net/ecommerce?retryWrites=true&w=majority
+[2021-05-24T22:10:47.674] [INFO] default - Servidor express escuchando en el puerto 8080 - PID WORKER 4280
+[2021-05-24T22:10:48.783] [INFO] default - Se conecto a la BD MongoDB cluter0 en Mongo Atlas => ecommerce
+[2021-05-24T22:12:02.536] [TRACE] default - FORK !!!

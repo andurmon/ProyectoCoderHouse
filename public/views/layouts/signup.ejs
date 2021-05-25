@@ -37,7 +37,7 @@
         </style>
         
         <!-- <form id="signUpForm"  rel="noreferrer" target="signUpForm-result" > -->
-        <form id="signUpForm" action="http://localhost:8080/signup" method="post" rel="noreferrer" target="_parent" >
+        <form id="signUpForm" action="<%= url %>/signup" method="post" rel="noreferrer" target="_parent" >
             <div class="container">
                 <h1>Registrarse</h1>
                 <p>Para registrarse por favor llenar los siguientes datos.</p>
@@ -89,7 +89,7 @@
                 loader.className = "loader loader-visible";
                 let { email, password, name, apellido, age, alias, avatar} = signUpForm.elements
                 console.log(email, password, name, apellido, age, alias, avatar);
-                // axios.post("http://localhost:8080/signup", {
+                // axios.post("<%= url %>/signup", {
                 //     email: email.value,
                 //     password: password.value,
                 //     nombre: name.value,
