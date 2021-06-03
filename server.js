@@ -63,7 +63,7 @@ app.post("/login", passport.authenticate("login", {failureRedirect: '/login'} ),
     res.redirect("/productos/vista")
 });
 
-app.post("/login-facebook", passport.authenticate("facebook", {failureRedirect: '/fail'} ), (req, res) => {
+app.post("/login-facebook", passport.authenticate("facebook", {succesRedirect: '/login-mail', failureRedirect: '/fail'} ), (req, res) => {
     logger.trace("Hi");
     res.redirect("/productos/vista")
 });
@@ -73,10 +73,34 @@ app.post("/signup", passport.authenticate("signup", {failureRedirect: '/signup'}
     res.redirect("login")
 });
 
+const ethereal = require("./mails/nodemailer-ethereal");
+const gmail = require("./mails/nodemailer-gmail");
+
 app.post("/logout", (req, res)=>{
     req.logout();
     res.send("Logout")
 });
+
+//----- MAILS ------------
+app.get("/login-mail", (req, res) => {
+
+    ethereal.enviarMail("Asunto", "mensaje", (err, info) => {
+        if(err) console.log(err)
+        else console.log(info)
+
+        //--------------------------------------
+        //Registro de datos de usuario por gmail
+        //--------------------------------------
+        gmail.enviarMail("Asunto", "mensaje", foto, "andurmon@gmail.com", (err, info) => {
+            if(err) console.log(err)
+            else console.log(info)
+
+            res.redirect('/')        
+        })
+    })
+
+});
+
 
 // Vistas - Front End desde el servidor
 app.set("views", "./public/views");
