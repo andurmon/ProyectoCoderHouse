@@ -398,3 +398,6 @@
 [2021-06-02T23:17:18.991] [INFO] default - Servidor express escuchando en el puerto 8080 - PID WORKER 9252
 [2021-06-02T23:17:20.196] [INFO] default - Se conecto a la BD MongoDB cluter0 en Mongo Atlas => ecommerce
 [2021-06-02T23:17:25.927] [TRACE] default - FORK !!!
+[2021-06-02T23:17:28.539] [TRACE] default - mongodb+srv://andurmon:admin@cluster0.4b6ca.mongodb.net/ecommerce?retryWrites=true&w=majority
+[2021-06-02T23:17:28.605] [INFO] default - Servidor express escuchando en el puerto 8080 - PID WORKER 12644
+[2021-06-02T23:17:29.900] [INFO] default - Se conecto a la BD MongoDB cluter0 en Mongo Atlas => ecommerce
